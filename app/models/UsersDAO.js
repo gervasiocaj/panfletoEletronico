@@ -27,15 +27,14 @@ UsersDAO.prototype.authenticate = function(user, req, res){
 
         collection.find(user).toArray(function(error, result){
 
-        var autorizado; //so enquanto nao tem session
+        // var autorizado; //so enquanto nao tem session
 
         if (result[0] != undefined){
           autorizado = true;
-          // req.session.autorizado = true;
-          // req.session.user = result[0].user;
+          req.session.autorizado = true;
         }
 
-        if (autorizado){ // if (req.session.autorizado){
+        if (req.session.autorizado){
           res.render('itemRegister', {errors : {}, formData : {}});
         } else{
           res.render('login', {errors : {}, formData : {}});

@@ -5,8 +5,6 @@ module.exports.itemRegister = function(application, req, res){
 module.exports.itemRegisterPost = function(application, req, res){
   var formData = req.body;
 
-  console.log(formData);
-
 	req.assert('titulo', 'Título não pode ser vazio').notEmpty();
 	req.assert('descricao', 'Descrição não pode ser vazia').notEmpty();
 
@@ -19,7 +17,6 @@ module.exports.itemRegisterPost = function(application, req, res){
 
   if ((formData.oferta != '') && (formData.promocao != '') && (formData.sorteio != '')){
     var customError;
-      console.log(errors);
       if(errors) {
         customError = { param: 'Item',
           msg: 'Selecione uma das opções de item',
@@ -33,8 +30,6 @@ module.exports.itemRegisterPost = function(application, req, res){
         errors.push(customError);
       }
   }
-
-  console.log(errors);
 
 	if  (errors){
 			res.render('itemRegister', {errors : errors, formData : formData});

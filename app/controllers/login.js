@@ -18,7 +18,5 @@ module.exports.loginPost = function(application, req, res){
   var connection = application.config.dbConnection;
   var UsersDAO = new application.app.models.UsersDAO(connection, req, res);
 
-  UsersDAO.authenticate(formData, request, response);
-
-  // res.render('itemRegister', {errors : {}, formData : {}});
+  UsersDAO.authenticate(formData, req, res);
 }

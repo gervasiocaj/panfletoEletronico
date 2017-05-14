@@ -27,16 +27,18 @@ UsersDAO.prototype.authenticate = function(user, req, res){
 
         collection.find(user).toArray(function(error, result){
 
+        var autorizado; //so enquanto nao tem session
+
         if (result[0] != undefined){
-          req.session.autorizado = true;
-          req.session.user = result[0].user;
-          req.session.casa = result[0].casa;
+          autorizado = true;
+          // req.session.autorizado = true;
+          // req.session.user = result[0].user;
         }
 
-        if (req.session.autorizado){
-          res.redirect('jogo');
+        if (autorizado){ // if (req.session.autorizado){
+          res.render('itemRegister', {errors : {}, formData : {}});
         } else{
-          res.render('index', {validacao:{}});
+          res.render('login', {errors : {}, formData : {}});
         }
 
         });

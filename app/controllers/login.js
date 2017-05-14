@@ -17,5 +17,5 @@ module.exports.loginPost = function(application, req, res){
 
   // var connection = application.config.dbConnection;
 
-  res.render('itemRegister');
+  res.render('itemRegister', {errors : {}, formData : {}});
 }

@@ -20,29 +20,43 @@
 <body background="images/background-itens.jpg">
 <h1 class="header-w3ls">Cadastro de itens</h1>
 <div class="content-w3ls">
+
+	<% if(errors.length > 0) { %>
+			<div class="alert alert-danger">
+				<strong>Atenção!</strong>
+				<ul>
+					<% for(var i = 0; i < errors.length; i++) { %>
+						<li>
+							<%= errors[i].msg %>
+						</li>
+				<% } %>
+				</ul>
+			</div>
+		<% } %>
+
 	<div class="form-w3ls">
-		<form action="#" method="post">
+		<form action='/itemCadastro' method='post'>
 			<div class="content-wthree1">
 				<div class="grid-agileits1">
 
 					<div class="form-control">
 						<label class="header">Título</label>
-						<input type="text" id="titulo" name="titulo" placeholder="Título" required="">
+						<input type="text" id="titulo" name="titulo" placeholder="Título" required="" value='<%= formData.titulo %>'>
 					</div>
 
           <div class="form-control">
 						<label class="header">Descrição</label>
-						<input type="text" id="descricao" name="descricao" placeholder="Descrição" required="">
+						<input type="text" id="descricao" name="descricao" placeholder="Descrição" required="" value='<%= formData.descricao %>'>
 					</div>
 
           <div class="form-control">
 						<label class="header">Preço normal</label>
-						<input type="text" id="precoN" name="precoN" placeholder="$" required="">
+						<input type="text" id="precoN" name="precoN" placeholder="$"value='<%= formData.precoN %>'>
 					</div>
 
           <div class="form-control">
 						<label class="header">Preço oferta</label>
-						<input type="text" id="precoO" name="precoO" placeholder="$" required="">
+						<input type="text" id="precoO" name="precoO" placeholder="$" value='<%= formData.precoO %>'>
 					</div>
 
 				</div>
@@ -55,17 +69,17 @@
 						<label class="header">Informe o tipo do item</label>
 						<ul>
 							<li>
-								<input type="radio" id="a-option" name="selector1">
+								<input type="radio" id="a-option" name="oferta" value='<%= formData.oferta %>'>
 								<label for="a-option">Oferta </label>
 								<div class="check"></div>
 							</li>
 							<li>
-								<input type="radio" id="b-option" name="selector1">
+								<input type="radio" id="b-option" name="promocao" value='<%= formData.promocao %>'>
 								<label for="b-option">Promoção</label>
 								<div class="check"><div class="inside"></div></div>
 							</li>
 							<li>
-								<input type="radio" id="c-option" name="selector1">
+								<input type="radio" id="c-option" name="sorteio" value='<%= formData.sorteio %>'>
 								<label for="c-option">Sorteio</label>
 								<div class="check"><div class="inside"></div></div>
 							</li>

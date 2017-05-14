@@ -1,0 +1,50 @@
+var crypto = require('crypto');
+
+function UsersDAO(connection){
+  this._connection = connection();
+}
+
+UsersDAO.prototype.insertUser = function(user){
+  this._connection.open(function(error, mongoclient){
+    mongoclient.collection('user', function(error, collection){
+
+        var crypto_password = crypto.createHash('md5').update(user.password).digest('hex');
+        user.password = crypto_password;
+
+        collection.insert(user);
+
+        mongoclient.close();
+    });
+  });
+}
+
+UsersDAO.prototype.authenticate = function(user, req, res){
+  this._connection.open(function(error, mongoclient){
+    mongoclient.collection('user', function(error, collection){
+
+        var crypto_password = crypto.createHash('md5').update(user.password).digest('hex');
+        user.password = crypto_password;
+
+        collection.find(user).toArray(function(error, result){
+
+        if (result[0] != undefined){
+          req.session.autorizado = true;
+          req.session.user = result[0].user;
+          req.session.casa = result[0].casa;
+        }
+
+        if (req.session.autorizado){
+          res.redirect('jogo');
+        } else{
+          res.render('index', {validacao:{}});
+        }
+
+        });
+        mongoclient.close();
+    });
+  });
+}
+
+module.exports = function(){
+  return UsersDAO;
+}

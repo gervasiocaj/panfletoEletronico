@@ -15,7 +15,10 @@ module.exports.loginPost = function(application, req, res){
 			return ;
 	}
 
-  // var connection = application.config.dbConnection;
+  var connection = application.config.dbConnection;
+  var UsersDAO = new application.app.models.UsersDAO(connection, req, res);
 
-  res.render('itemRegister', {errors : {}, formData : {}});
+  UsersDAO.authenticate(formData, request, response);
+
+  // res.render('itemRegister', {errors : {}, formData : {}});
 }

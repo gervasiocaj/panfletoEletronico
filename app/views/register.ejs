@@ -30,15 +30,10 @@
 	<h2>Cadastre sua conta</h2>
 	<div class="w3layoutscontaineragileits">
 		<form action="#" method="post">
-			<input type="text" Name="username" placeholder="Usuário" required="">
-			<input type="password" Name="password" placeholder="Senha" required="">
-			<input type="password" Name="password2" placeholder="Repita a senha" required="">
-			<!-- <ul class="agileinfotickwthree">
-				<li>
-					<input type="checkbox" id="brand1" value="">
-					<label for="brand1"><span></span>Remember me</label>
-				</li>
-			</ul> -->
+
+			<input type="text" Name="username" placeholder="Usuário" required="" value='<%= formData.username %>'>
+			<input type="password" Name="password" placeholder="Senha" required="" value='<%= formData.password %>'>
+			<input type="password" Name="password2" placeholder="Repita a senha" required="" value='<%= formData.password2 %>'>
 
 			<div class="aitssendbuttonw3ls">
 				<div>

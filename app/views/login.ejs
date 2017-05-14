@@ -29,15 +29,10 @@
 
 	<h2>Acesse sua conta</h2>
 	<div class="w3layoutscontaineragileits">
-		<form action="#" method="post">
-			<input type="text" Name="username" placeholder="Usuário" required="">
-			<input type="password" Name="password" placeholder="Senha" required="">
-			<!-- <ul class="agileinfotickwthree">
-				<li>
-					<input type="checkbox" id="brand1" value="">
-					<label for="brand1"><span></span>Remember me</label>
-				</li>
-			</ul> -->
+		<form  action='/login' method='post'>
+
+			<input type="text" Name="username" placeholder="Usuário" required="" value='<%= formData.username %>'>
+			<input type="password" Name="password" placeholder="Senha" required="" value='<%= formData.password %>'>
 
 			<div class="aitssendbuttonw3ls">
 				<div>
@@ -48,6 +43,7 @@
 					<p><a href="/cadastro">CADASTRAR<span>→</span></a></p>
 				</div>
 			</div>
+			
 		</form>
 	</div>
 

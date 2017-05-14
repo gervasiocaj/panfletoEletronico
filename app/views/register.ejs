@@ -29,7 +29,21 @@
 
 	<h2>Cadastre sua conta</h2>
 	<div class="w3layoutscontaineragileits">
-		<form action="#" method="post">
+
+		<% if(errors.length > 0) { %>
+				<div class="alert alert-danger">
+					<strong>Atenção!</strong>
+					<ul>
+						<% for(var i = 0; i < errors.length; i++) { %>
+							<li>
+								<%= errors[i].msg %>
+							</li>
+					<% } %>
+					</ul>
+				</div>
+			<% } %>
+
+		<form action='/cadastro' method='post'>
 
 			<input type="text" Name="username" placeholder="Usuário" required="" value='<%= formData.username %>'>
 			<input type="password" Name="password" placeholder="Senha" required="" value='<%= formData.password %>'>

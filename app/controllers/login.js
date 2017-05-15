@@ -1,4 +1,5 @@
 module.exports.login = function(application, req, res){
+  res.status(200);
   res.render('login', {errors : {}, formData : {}});
 }
 
@@ -11,6 +12,7 @@ module.exports.loginPost = function(application, req, res){
   var errors = req.validationErrors();
 
 	if  (errors){
+      res.status(400);
 			res.render('login', {errors : errors, formData : formData});
 			return ;
 	}

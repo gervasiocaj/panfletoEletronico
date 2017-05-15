@@ -1,5 +1,6 @@
 module.exports.itemRegister = function(application, req, res){
   if(req.session.autorizado != true){
+      res.status(401);
       res.send('Usuario precisa estar logado');
       return;
     }
@@ -9,6 +10,7 @@ module.exports.itemRegister = function(application, req, res){
 
 module.exports.itemRegisterPost = function(application, req, res){
   if(req.session.autorizado != true){
+      res.status(401);
       res.send('Usuario precisa estar logado');
       return;
     }

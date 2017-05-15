@@ -22,7 +22,7 @@ module.exports.registerPost = function(application, req, res){
 
   delete formData['password2']; //remove o campo password2 do form
 
-	UsersDAO.insertUser(formData);
+	UsersDAO.insertItem(formData);
 
   res.render('login', {errors : {}, formData : {}});
 }

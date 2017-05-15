@@ -21,6 +21,8 @@ module.exports.itemRegisterPost = function(application, req, res){
   if (formData.oferta == 'on'){
   	req.assert('precoN', 'Preço normal não pode ser vazio').notEmpty();
   	req.assert('precoO', 'Preço da oferta não pode ser vazio').notEmpty();
+  	req.assert('precoN', 'Preço normal deve conter apenas números').isFloat();
+  	req.assert('precoO', 'Preço da oferta deve conter apenas números').isFloat();
   }
 
   var errors = req.validationErrors();
@@ -46,7 +48,10 @@ module.exports.itemRegisterPost = function(application, req, res){
 			return ;
 	}
 
-  // var connection = application.config.dbConnection;
+  var connection = application.config.dbConnection;
+	var ItensDAO = new application.app.models.ItensDAO(connection);
+
+	ItensDAO.insertItem(formData);
 
   res.render('itemRegister', {errors : {}, formData : {}});
 }

@@ -18,7 +18,11 @@ module.exports.itemRegisterPost = function(application, req, res){
 	req.assert('titulo', 'Título não pode ser vazio').notEmpty();
 	req.assert('descricao', 'Descrição não pode ser vazia').notEmpty();
 
-  if (formData.oferta == 'on'){
+  console.log(formData);
+  console.log(formData.tip);
+  console.log(formData.tipo  == undefined);
+
+  if (formData.tipo == 'oferta'){
   	req.assert('precoN', 'Preço normal não pode ser vazio').notEmpty();
   	req.assert('precoO', 'Preço da oferta não pode ser vazio').notEmpty();
   	req.assert('precoN', 'Preço normal deve conter apenas números').isFloat();
@@ -27,7 +31,7 @@ module.exports.itemRegisterPost = function(application, req, res){
 
   var errors = req.validationErrors();
 
-  if ((formData.oferta  == undefined) && (formData.promocao  == undefined) && (formData.sorteio  == undefined)){
+  if (formData.tipo  == undefined){
     var customError;
       if(errors) {
         customError = { param: 'Item',

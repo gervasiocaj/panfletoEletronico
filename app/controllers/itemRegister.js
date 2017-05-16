@@ -20,10 +20,6 @@ module.exports.itemRegisterPost = function(application, req, res){
 	req.assert('titulo', 'Título não pode ser vazio').notEmpty();
 	req.assert('descricao', 'Descrição não pode ser vazia').notEmpty();
 
-  console.log(formData);
-  console.log(formData.tip);
-  console.log(formData.tipo  == undefined);
-
   if (formData.tipo == 'oferta'){
   	req.assert('precoN', 'Preço normal não pode ser vazio').notEmpty();
   	req.assert('precoO', 'Preço da oferta não pode ser vazio').notEmpty();
@@ -57,7 +53,7 @@ module.exports.itemRegisterPost = function(application, req, res){
   var connection = application.config.dbConnection;
 	var ItensDAO = new application.app.models.ItensDAO(connection);
 
-	ItensDAO.insertItem(formData);
+	ItensDAO.insertItem(formData, req.session.user);
 
   res.render('itemRegister', {errors : {}, formData : {}});
 }

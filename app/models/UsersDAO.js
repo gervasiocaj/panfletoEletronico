@@ -30,6 +30,7 @@ UsersDAO.prototype.authenticate = function(user, req, res){
         if (result[0] != undefined){
           autorizado = true;
           req.session.autorizado = true;
+          req.session.user = result[0].username;
         }
 
         if (req.session.autorizado){

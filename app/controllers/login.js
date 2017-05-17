@@ -13,18 +13,8 @@ module.exports.loginPost = function(application, req, res){
 
 	if  (errors){
       res.status(400);
-      res.format({
-        html: function(){
-          res.render('login', {errors : errors, formData : formData});
-        },
-
-        json: function(){
-          var jsnReturn = {errors : errors};
-          res.setHeader('Content-Type', 'application/json');
-          res.json(jsnReturn);
-        }
-      })
-			return ;
+      res.render('login', {errors : errors, formData : formData});
+			return;
 	}
 
   var connection = application.config.dbConnection;

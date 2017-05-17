@@ -35,31 +35,10 @@ UsersDAO.prototype.authenticate = function(user, req, res){
 
         if (req.session.autorizado){
           res.status(200);
-          res.format({
-            html: function(){
-              res.render('itemRegister', {errors : {}, formData : {}});
-            },
-
-            json: function(){
-              var jsnReturn = { status : 'authorized' };
-              res.setHeader('Content-Type', 'application/json');
-              res.json(jsnReturn);
-            }
-          })
+          res.render('itemRegister', {errors : {}, formData : {}});
         } else{
           res.status(401);
-          res.format({
-            html: function(){
-              res.render('login', {errors : {}, formData : {}});
-            },
-
-            json: function(){
-              var jsnReturn = { status : 'unauthorized' };
-              res.setHeader('Content-Type', 'application/json');
-              res.json(jsnReturn);
-            }
-          })
-
+          res.render('login', {errors : {}, formData : {}});
         }
 
         });

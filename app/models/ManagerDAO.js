@@ -36,8 +36,6 @@ ManagerDAO.prototype.authenticate = function(manager, req, res){
           req.session.company = managerFound.company;
         }
 
-        console.log(managerFound);
-
         if (req.session.autorizado){
           res.status(200);
           res.render('itemRegister', {errors : {}, formData : {}});

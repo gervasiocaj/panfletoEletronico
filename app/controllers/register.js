@@ -7,6 +7,7 @@ module.exports.registerPost = function(application, req, res){
 
 	req.assert('username', 'Usuário não pode ser vazio').notEmpty();
 	req.assert('password', 'Senha não pode ser vazia').notEmpty();
+	req.assert('company', 'Empresa não pode ser vazia').notEmpty();
 	req.assert('password2', 'Senha não pode ser vazia').notEmpty();
   req.assert('password', 'As senhas devem ser iguais').equals(formData.password2);
 
@@ -18,11 +19,11 @@ module.exports.registerPost = function(application, req, res){
 	}
 
   var connection = application.config.dbConnection;
-	var UsersDAO = new application.app.models.UsersDAO(connection);
+	var ManagerDAO = new application.app.models.ManagerDAO(connection);
 
   delete formData['password2']; //remove o campo password2 do form
 
-	UsersDAO.insertItem(formData);
+	ManagerDAO.insertManager(formData);
 
   res.render('login', {errors : {}, formData : {}});
 }

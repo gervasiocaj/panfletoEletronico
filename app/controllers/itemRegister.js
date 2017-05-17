@@ -53,7 +53,7 @@ module.exports.itemRegisterPost = function(application, req, res){
   var connection = application.config.dbConnection;
 	var ItensDAO = new application.app.models.ItensDAO(connection);
 
-	ItensDAO.insertItem(formData, req.session.user);
+	ItensDAO.insertItem(formData, req.session.manager, req.session.company);
 
   res.render('itemRegister', {errors : {}, formData : {}});
 }

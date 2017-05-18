@@ -53,6 +53,16 @@ module.exports.itemRegisterPost = function(application, req, res){
   var connection = application.config.dbConnection;
 	var ItensDAO = new application.app.models.ItensDAO(connection);
 
+
+  //bloco responsável para criar o nome unico para o itemRegister
+  console.log(formData);
+
+  // var date = new Date();
+  // var time_stamp = date.getTime();
+  // var url_imagem = time_stamp + '_' + formData.imagem.originalFilename;
+  // var path_origem = formData.imagem.path;
+  // var path_destino = './uploads/' + url_imagem;
+
 	ItensDAO.insertItem(formData, req.session.manager, req.session.company);
 
   res.render('itemRegister', {errors : {}, formData : {}});

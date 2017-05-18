@@ -7,11 +7,17 @@ var consign = require('consign');
 /* importar o módulo do body-parser */
 var bodyParser = require('body-parser');
 
+/* importar o módulo do connect-multiparty */
+var multiparty = require('connect-multiparty');
+
 /* importar o módulo do express-validator */
 var expressValidator = require('express-validator');
 
 /* importar o módulo do express-session */
 var expressSession = require('express-session');
+
+/* importar o módulo do fs */
+var fs = require('fs');
 
 /* iniciar o objeto do express */
 var app = express();
@@ -25,6 +31,9 @@ app.use(express.static('./app/public'));
 
 /* configurar o middleware body-parser */
 app.use(bodyParser.urlencoded({extended: true}));
+
+/* configurar o middleware connect-multiparty */
+app.use(multiparty());
 
 /* configurar o middleware express-validator */
 app.use(expressValidator());

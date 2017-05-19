@@ -57,21 +57,37 @@ module.exports.itemRegisterPost = function(application, req, res){
   var connection = application.config.dbConnection;
 	var ItensDAO = new application.app.models.ItensDAO(connection);
 
-
-  //bloco responsável para criar o nome unico para o itemRegister
-  console.log(formData);
-
   formData['manager'] = req.session.manager;
   formData['company'] = req.session.company;
   delete formData['submit'];
 
-  console.log(formData);
+  var hasImage;
+  if (req.files.imagem.size != 0){
+    var fs = require('fs');
 
-  // var date = new Date();
-  // var time_stamp = date.getTime();
-  // var url_imagem = time_stamp + '_' + formData.imagem.originalFilename;
-  // var path_origem = formData.imagem.path;
-  // var path_destino = './uploads/' + url_imagem;
+    hasImage = true;
+    var formImage = req.files.imagem;
+
+    //bloco responsável para criar o nome unico para o itemRegister
+    var date = new Date();
+    var time_stamp = date.getTime();
+    var url_imagem = time_stamp + '_' + formImage.originalFilename;
+    var path_origem = formImage.path;
+    var path_destino = './uploads/' + url_imagem;
+    formData['path'] = path_destino;
+
+    fs.rename(path_origem, path_destino, function(err){
+      if(err){
+        res.status(500);
+        res.send('Erro ' + err);
+        return;
+      }
+    });
+
+  }
+  else{
+    hasImage = false;
+  }
 
 	ItensDAO.insertItem(formData);
 

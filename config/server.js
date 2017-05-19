@@ -16,9 +16,6 @@ var expressValidator = require('express-validator');
 /* importar o módulo do express-session */
 var expressSession = require('express-session');
 
-/* importar o módulo do fs */
-var fs = require('fs');
-
 /* iniciar o objeto do express */
 var app = express();
 

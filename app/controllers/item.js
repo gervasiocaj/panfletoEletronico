@@ -11,11 +11,21 @@ module.exports.itemRegisterView = function(application, req, res){
 module.exports.itemGet = function(application, req, res){
   if(req.session.autorizado != true){
       res.status(200);
-      res.send('Lista de itens');
+
+        res.format({
+          html: function(){
+            res.send('Lista de itens');
+          },
+
+          json: function(){
+            var jsnReturn = {result : 'result'};
+            res.setHeader('Content-Type', 'application/json');
+            res.json(jsnReturn);
+          }
+        });
+
       return;
     }
-
-  res.render('itemRegister', {errors : {}, formData : {}});
 }
 
 module.exports.itemPost = function(application, req, res){

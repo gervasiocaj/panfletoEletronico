@@ -1,7 +1,7 @@
 var mongo = require('mongodb');
 
 var conMongoDb = function(){
-  console.log('DB online')
+  console.log('DB online');
   var db = new mongo.Db(
     'panfletoEletronico',
     new mongo.Server(

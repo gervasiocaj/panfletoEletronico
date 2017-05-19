@@ -1,4 +1,4 @@
-module.exports.itemRegister = function(application, req, res){
+module.exports.itemRegisterView = function(application, req, res){
   if(req.session.autorizado != true){
       res.status(401);
       res.send('Usuario precisa estar logado');
@@ -8,7 +8,17 @@ module.exports.itemRegister = function(application, req, res){
   res.render('itemRegister', {errors : {}, formData : {}});
 }
 
-module.exports.itemRegisterPost = function(application, req, res){
+module.exports.itemGet = function(application, req, res){
+  if(req.session.autorizado != true){
+      res.status(200);
+      res.send('Lista de itens');
+      return;
+    }
+
+  res.render('itemRegister', {errors : {}, formData : {}});
+}
+
+module.exports.itemPost = function(application, req, res){
   if(req.session.autorizado != true){
       res.status(401);
       res.send('Usuario precisa estar logado');

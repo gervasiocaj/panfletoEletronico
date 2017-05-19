@@ -1,4 +1,4 @@
-module.exports.login = function(application, req, res){
+module.exports.loginView = function(application, req, res){
   res.status(200);
   res.render('login', {errors : {}, formData : {}});
 }

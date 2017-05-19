@@ -1,8 +1,8 @@
-module.exports.register = function(application, req, res){
+module.exports.registerView = function(application, req, res){
   res.render('register', {errors : {}, formData : {}});
 }
 
-module.exports.registerPost = function(application, req, res){
+module.exports.userPost = function(application, req, res){
   var formData = req.body;
 
 	req.assert('username', 'Usuário não pode ser vazio').notEmpty();

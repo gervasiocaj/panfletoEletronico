@@ -26,6 +26,10 @@ module.exports.itemRegisterPost = function(application, req, res){
   	req.assert('precoN', 'Preço normal deve conter apenas números').isFloat();
   	req.assert('precoO', 'Preço da oferta deve conter apenas números').isFloat();
   }
+  else{
+    delete formData['precoN'];
+    delete formData['precoO'];
+  }
 
   var errors = req.validationErrors();
 
@@ -57,13 +61,19 @@ module.exports.itemRegisterPost = function(application, req, res){
   //bloco responsável para criar o nome unico para o itemRegister
   console.log(formData);
 
+  formData['manager'] = req.session.manager;
+  formData['company'] = req.session.company;
+  delete formData['submit'];
+
+  console.log(formData);
+
   // var date = new Date();
   // var time_stamp = date.getTime();
   // var url_imagem = time_stamp + '_' + formData.imagem.originalFilename;
   // var path_origem = formData.imagem.path;
   // var path_destino = './uploads/' + url_imagem;
 
-	ItensDAO.insertItem(formData, req.session.manager, req.session.company);
+	ItensDAO.insertItem(formData);
 
   res.render('itemRegister', {errors : {}, formData : {}});
 }

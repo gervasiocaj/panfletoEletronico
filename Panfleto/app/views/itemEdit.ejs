@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>Cadastro de itens</title>
+<title>Edição de itens</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Classy Job Application Form Widget Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
@@ -18,21 +18,8 @@
 
 </head>
 <body background="images/background-itens.jpg">
-<h1 class="header-w3ls">Cadastro de itens</h1>
+<h1 class="header-w3ls">Edição de itens</h1>
 <div class="content-w3ls">
-
-	<% if(errors.length > 0) { %>
-			<div class="alert alert-danger">
-				<strong>Atenção!</strong>
-				<ul>
-					<% for(var i = 0; i < errors.length; i++) { %>
-						<li>
-							<%= errors[i].msg %>
-						</li>
-				<% } %>
-				</ul>
-			</div>
-		<% } %>
 
 	<div class="form-w3ls">
 		<form action='/item' method='post' enctype='multipart/form-data'>
@@ -68,37 +55,10 @@
 				<input type="file" name="imagem" id="imagem" accept="image/*" class="form-control">
 			</div>
 
-			<div class="content-wthree3">
-				<div class="grid-w3layouts1">
-
-					<div class="w3-agile1">
-						<label class="header">Informe o tipo do item</label>
-						<ul>
-							<li>
-								<input type="radio" id="a-option" name="tipo" value='oferta'>
-								<label for="a-option">Oferta </label>
-								<div class="check"></div>
-							</li>
-							<li>
-								<input type="radio" id="b-option" name="tipo" value='promocao'>
-								<label for="b-option">Promoção</label>
-								<div class="check"><div class="inside"></div></div>
-							</li>
-							<li>
-								<input type="radio" id="c-option" name="tipo" value='sorteio'>
-								<label for="c-option">Sorteio</label>
-								<div class="check"><div class="inside"></div></div>
-							</li>
-						</ul>
-					</div>
-
-				</div>
-			</div>
-
 					<div class="w3ls-btn">
 						<div class="contact-forms">
 							<div class="wthreesubmitaits">
-								<input type="submit" name="submit" value="Cadastrar">
+								<input type="submit" name="submit" value="Alterar">
 							</div>
 						</div>
 					</div>

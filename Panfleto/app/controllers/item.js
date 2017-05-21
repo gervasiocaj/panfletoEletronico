@@ -15,7 +15,7 @@ module.exports.itemGet = function(application, req, res){
       return;
     }
 
-    res.send('Lista de itens');   
+    res.send('Lista de itens');
 
 }
 
@@ -30,6 +30,8 @@ module.exports.itemPost = function(application, req, res){
 
 	req.assert('titulo', 'Título não pode ser vazio').notEmpty();
 	req.assert('descricao', 'Descrição não pode ser vazia').notEmpty();
+  req.assert('dataIni', 'Data de início não pode ser vazio').notEmpty();
+  req.assert('dataFim', 'Data de fim não pode ser vazio').notEmpty();
 
   if (formData.tipo == 'oferta'){
   	req.assert('precoN', 'Preço normal não pode ser vazio').notEmpty();
@@ -43,9 +45,29 @@ module.exports.itemPost = function(application, req, res){
   }
 
   var errors = req.validationErrors();
+  var customError;
 
+  //valida se a data final é maior que a inicial
+  var dateValidation = new Date(formData.dataFim) < new Date(formData.dataIni);
+  if (dateValidation){
+    customError;
+      if(errors) {
+        customError = { param: 'dataFim',
+          msg: 'A data Final deve ser superior a inicial',
+          value: formData.dataFim };
+        errors.push(customError);
+      }
+      else{
+        errors = [];
+        customError = '{ "param": "dataFim", "msg": "A data Final deve ser superior a inicial", "value": "" }';
+        customError = JSON.parse(customError);
+        errors.push(customError);
+      }
+  }
+
+  //valida se o tipo foi definido
   if (formData.tipo  == undefined){
-    var customError;
+    customError;
       if(errors) {
         customError = { param: 'Item',
           msg: 'Selecione uma das opções de item',

@@ -21,56 +21,56 @@
 <h1 class="header-w3ls">Cadastro de itens</h1>
 <div class="content-w3ls">
 
-	<% if(errors.length > 0) { %>
-			<div class="alert alert-danger">
-				<strong>Atenção!</strong>
-				<ul>
-					<% for(var i = 0; i < errors.length; i++) { %>
-						<li>
-							<%= errors[i].msg %>
-						</li>
-				<% } %>
-				</ul>
-			</div>
-		<% } %>
+	<% if (locals.error) { %>
+	<div class="alert alert-danger">
+		<strong>Atenção!</strong>
+		<ul>
+			<li>
+				<%= error.message %>
+			</li>
+
+		</ul>
+	</div>
+	<% } %>
+
+    <% if (locals.success) { %>
+	<div class="alert alert-info">
+		<ul>
+			<li>
+                <%= success.message %>
+			</li>
+		</ul>
+	</div>
+    <% } %>
 
 	<div class="form-w3ls">
 		<form action='/item' method='post' enctype='multipart/form-data'>
 			<div class="content-wthree1">
 				<div class="grid-agileits1">
-
 					<div class="form-control">
 						<label class="header">Título</label>
-						<input type="text" id="titulo" name="titulo" placeholder="Título" required="" value='<%= formData.titulo %>'>
+						<input type="text" id="titulo" name="titulo" placeholder="Título" required="" value='<%= data.titulo %>'>
 					</div>
-
-          <div class="form-control">
+					<div class="form-control">
 						<label class="header">Descrição</label>
-						<input type="text" id="descricao" name="descricao" placeholder="Descrição" required="" value='<%= formData.descricao %>'>
+						<input type="text" id="descricao" name="descricao" placeholder="Descrição" required="" value='<%= data.descricao %>'>
 					</div>
-
-          <div class="form-control">
+					<div class="form-control">
 						<label class="header">Preço normal</label>
-						<input type="text" id="precoN" name="precoN" placeholder="$"value='<%= formData.precoN %>'>
+						<input type="text" id="precoN" name="precoN" placeholder="$"value='<%= data.precoN %>'>
 					</div>
-
-          <div class="form-control">
+					<div class="form-control">
 						<label class="header">Preço oferta</label>
-						<input type="text" id="precoO" name="precoO" placeholder="$" value='<%= formData.precoO %>'>
+						<input type="text" id="precoO" name="precoO" placeholder="$" value='<%= data.precoO %>'>
 					</div>
-
 				</div>
-
 			</div>
-
 			<div class="content-wthree2">
 				<label class="header">Imagem</label>
 				<input type="file" name="imagem" id="imagem" accept="image/*" class="form-control">
 			</div>
-
 			<div class="content-wthree3">
 				<div class="grid-w3layouts1">
-
 					<div class="w3-agile1">
 						<label class="header">Informe o tipo do item</label>
 						<ul>
@@ -91,28 +91,18 @@
 							</li>
 						</ul>
 					</div>
-
 				</div>
 			</div>
-
-					<div class="w3ls-btn">
-						<div class="contact-forms">
-							<div class="wthreesubmitaits">
-								<input type="submit" name="submit" value="Cadastrar">
-							</div>
-						</div>
+			<div class="w3ls-btn">
+				<div class="contact-forms">
+					<div class="wthreesubmitaits">
+						<input type="submit" name="submit" value="Cadastrar">
 					</div>
-
-				</form>
+				</div>
+			</div>
+		</form>
 	</div>
-
 </div>
-
 <p class="copyright">Panfleto Eletrônico</p>
-
-<script>
-
-</script>
-
 </body>
 </html>

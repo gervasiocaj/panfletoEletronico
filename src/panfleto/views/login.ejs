@@ -4,7 +4,7 @@
 <!-- Head -->
 <head>
 
-<title>Panfletro Eletrônico</title>
+<title>Panfleto Eletrônico</title>
 
 <!-- Meta-Tags -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,45 +25,52 @@
 <!-- Body -->
 <body background="images/background.jpg">
 
-	<h1>Cadastro</h1>
+	<h1>PANFLETO ELETRÔNICO</h1>
 
-	<h2>Cadastre sua conta</h2>
+	<h2>Acesse sua conta</h2>
 	<div class="w3layoutscontaineragileits">
 
-		<% if(errors.length > 0) { %>
-				<div class="alert alert-danger">
-					<strong>Atenção!</strong>
-					<ul>
-						<% for(var i = 0; i < errors.length; i++) { %>
-							<li>
-								<%= errors[i].msg %>
-							</li>
-					<% } %>
-					</ul>
-				</div>
-			<% } %>
+		<% if (locals.error) { %>
+		<div class="alert alert-danger">
+			<strong>Atenção!</strong>
+			<ul>
+				<li>
+					<%= error.message %>
+				</li>
+			</ul>
+		</div>
+		<% } %>
 
-		<form action='/user' method='post'>
+		<% if (locals.success) { %>
+		<div class="alert alert-info">
+			<ul>
+				<li>
+					<%= success.message %>
+				</li>
+			</ul>
+		</div>
+		<% } %>
 
-			<input type="text" Name="username" placeholder="Usuário" required="" value='<%= formData.username %>'>
-			<input type="text" Name="company" placeholder="Empresa" required="" value='<%= formData.company %>'>
-			<input type="password" Name="password" placeholder="Senha" required="" value='<%= formData.password %>'>
-			<input type="password" Name="password2" placeholder="Repita a senha" required="" value='<%= formData.password2 %>'>
+		<form action='/login' method='post'>
+
+			<input type="text" Name="login" placeholder="Administrador" required="" value='<%= data.login %>'>
+			<input type="password" Name="password" placeholder="Senha" required="" value='<%= data.password %>'>
 
 			<div class="aitssendbuttonw3ls">
 				<div>
-					<input type="submit" value="REGISTRAR">
+					<input type="submit" value="LOGIN">
 				</div>
 
 				<div>
-					<p><a href="/login">CANCELAR<span>→</span></a></p>
+					<p><a href="/register">CADASTRAR<span>→</span></a></p>
 				</div>
 			</div>
+
 		</form>
 	</div>
 
 	<div class="w3footeragile">
-		<p> Pafleto Eletrônico <a target="_blank">
+		<p> Panfleto Eletrônico <a target="_blank"></a></p>
 	</div>
 
 </body>

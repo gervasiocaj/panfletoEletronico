@@ -6,6 +6,8 @@ var mongoose = require('mongoose'),
 // Find project working directory
 var src = process.cwd() + '/src/';
 
+var log = require(src + 'helpers/logging')(module);
+
 var utils = require(src + 'helpers/utils'),
     Image = require(src + 'panfleto/models/image'),
     Product = require(src + 'panfleto/models/product');
@@ -48,7 +50,7 @@ var OfferSchema = Product.schema.extend({
 
     endDate: {
         type: Date,
-        required: false,
+        required: true,
         validate: validator({
             validator: 'chkDates',
             message  : 'Data final da oferta deve ser anterior a data de início'})
@@ -85,14 +87,16 @@ OfferSchema.methods.toJSON = function () {
 
 // Register cascading actions
 OfferSchema.pre('save', function (next) {
-    var nestedObj = this.image;
+     var nestedObj = this.image;
 
     if (this.isNew && nestedObj) {
         nestedObj.save()
             .then(function (image) {
+                log.info('Offer image save with success!');
                 next()
             })
             .catch(function (err) {
+                log.error('Error to save offer image, please check this!');
                 next(err)
             })
     }

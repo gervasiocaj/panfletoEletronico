@@ -16,5 +16,8 @@
         "socketOptions": { "keepAlive": 1 }
       }
     }
+  },
+  "images": {
+    "mimetype": ["image/jpg", "image/jpeg", "image/png"]
   }
 }

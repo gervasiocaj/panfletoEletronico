@@ -50,10 +50,14 @@ var login = require('./panfleto/routes/index'),
     market = require('./panfleto/routes/market'),
     item = require('./panfleto/routes/item');
 
+// Load API routes
+var api = require('./api/routes/api');
+
 // Register routes
 app.use('/', login);
 app.use('/market', market);
 app.use('/item', item);
+app.use('/api', api);
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {

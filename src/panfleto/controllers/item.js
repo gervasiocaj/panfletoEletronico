@@ -1,120 +1,65 @@
+var fs = require('fs');
+
 // Find the src path
 var src = process.cwd() + '/src/';
 
 // Load Models
-var utils   = require(src + 'helpers/utils');
+var utils = require(src + 'helpers/utils'),
+    Image = require(src + 'panfleto/models/image'),
+    Offer = require(src + 'panfleto/models/offer');
 
-module.exports.getItemView = function(req, res) {
+module.exports.view = function(req, res) {
     res.locals.success = req.flash();
 
     /* Render itemRegister page */
     res.render('itemRegister', {data : {}});
 };
 
-module.exports.createItem = function (req, res) {
+module.exports.create = function (req, res) {
+    var item, image;
+    var data = req.body;
 
+    if (!data.type) {
+        req.flash('message', "O tipo do item deve ser selecionado, escolha entre 'oferta' e 'promoção'");
+        return res.redirect('/item');
+    }
+    if (data.type === 'offer') {
+        delete data.type;
+        item = new Offer(data);
+    }
+
+    if (req.file) {
+        image = new Image({
+            data: new Buffer(fs.readFileSync(req.file.path, 'base64'), 'base64'),
+            size: req.file.size,
+            encoding: 'base64',
+            mimetype: req.file.mimetype
+        });
+        item.image = image;
+        // item.markModified('image');
+    }
+    item.marketId = req.user;
+    item.save()
+        .then(function (item) {
+            req.flash('message', 'Promoção ou Oferta registrada com sucesso!');
+            return res.redirect('/item');
+        })
+        .catch(function (err) {
+            Image.findByIdAndRemove(image._id, function (err) {
+                if (err)
+                    // TODO(diegoadolfo): create a service to fix this problem
+                    log.warn("Cannot remove image by id " + image._id + " , it's will stay orphan in BD, please check this!");
+            });
+            req.flash('message', utils.extractErrorInfo(err));
+
+            res.locals.error = req.flash();
+            return res.render('ItemRegister', { data: data })
+        })
+        .then(function () {
+            fs.unlinkSync(req.file.path);
+        })
 };
 
-module.exports.getItem = function (req, res) {
-
+module.exports.read = function (req, res) {
+    res.type('text').send('Route not Implemented');
 };
-
-
-
-
-// module.exports.itemGet = function(application, req, res){
-//   if(req.session.autorizado != true){
-//       res.status(401);
-//       res.send('Usuario precisa estar logado');
-//       return;
-//     }
-//
-//     res.send('Lista de itens');
-//
-// }
-//
-// module.exports.itemPost = function(application, req, res){
-//   if(req.session.autorizado != true){
-//       res.status(401);
-//       res.send('Usuario precisa estar logado');
-//       return;
-//     }
-//
-//   var formData = req.body;
-//
-// 	req.assert('titulo', 'Título não pode ser vazio').notEmpty();
-// 	req.assert('descricao', 'Descrição não pode ser vazia').notEmpty();
-//
-//   if (formData.tipo == 'oferta'){
-//   	req.assert('precoN', 'Preço normal não pode ser vazio').notEmpty();
-//   	req.assert('precoO', 'Preço da oferta não pode ser vazio').notEmpty();
-//   	req.assert('precoN', 'Preço normal deve conter apenas números').isFloat();
-//   	req.assert('precoO', 'Preço da oferta deve conter apenas números').isFloat();
-//   }
-//   else{
-//     delete formData['precoN'];
-//     delete formData['precoO'];
-//   }
-//
-//   var errors = req.validationErrors();
-//
-//   if (formData.tipo  == undefined){
-//     var customError;
-//       if(errors) {
-//         customError = { param: 'Item',
-//           msg: 'Selecione uma das opções de item',
-//           value: '' };
-//         errors.push(customError);
-//       }
-//       else{
-//         errors = [];
-//         customError = '{ "param": "Item", "msg": "Selecione uma das opções de item", "value": "" }';
-//         customError = JSON.parse(customError);
-//         errors.push(customError);
-//       }
-//   }
-//
-// 	if  (errors){
-// 			res.render('itemRegister', {errors : errors, formData : formData});
-// 			return ;
-// 	}
-//
-//   var connection = application.config.dbConnection;
-// 	var ItensDAO = new application.app.models.ItensDAO(connection);
-//
-//   formData['manager'] = req.session.manager;
-//   formData['company'] = req.session.company;
-//   delete formData['submit'];
-//
-//   var hasImage;
-//   if (req.files.imagem.size != 0){
-//     var fs = require('fs');
-//
-//     hasImage = true;
-//     var formImage = req.files.imagem;
-//
-//     //bloco responsável para criar o nome unico para o itemRegister
-//     var date = new Date();
-//     var time_stamp = date.getTime();
-//     var url_imagem = time_stamp + '_' + formImage.originalFilename;
-//     var path_origem = formImage.path;
-//     var path_destino = './uploads/' + url_imagem;
-//     formData['path'] = path_destino;
-//
-//     fs.rename(path_origem, path_destino, function(err){
-//       if(err){
-//         res.status(500);
-//         res.send('Erro ' + err);
-//         return;
-//       }
-//     });
-//
-//   }
-//   else{
-//     hasImage = false;
-//   }
-//
-// 	ItensDAO.insertItem(formData);
-//
-//   res.render('itemRegister', {errors : {}, formData : {}});
-// }

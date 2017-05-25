@@ -55,6 +55,9 @@ passport.isAuthenticated = function () {
         if (req.isAuthenticated())
             return next();
 
-        res.redirect('/login');
+        req.flash('message', 'Faça login para acessar o conteúdo do site');
+        res.locals.error = req.flash();
+
+        res.render('login', {data: {}});
     }
 };

@@ -8,7 +8,7 @@ var src = process.cwd() + '/src/';
 var controller = require(src + 'panfleto/controllers/index');
 
 /* GET home page*/
-router.get('/', controller.home);
+router.get ('/', controller.home);
 
 /* GET login page. */
 router.get ('/login', controller.login);

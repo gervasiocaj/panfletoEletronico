@@ -41,6 +41,16 @@
 		</div>
 		<% } %>
 
+        <% if (locals.success) { %>
+		<div class="alert alert-info">
+			<ul>
+				<li>
+                    <%= success.message %>
+				</li>
+			</ul>
+		</div>
+        <% } %>
+
 		<form action='/market' method='post'>
 
 			<input type="text" name="login" placeholder="Administrador" required="" value='<%= data.login %>'>

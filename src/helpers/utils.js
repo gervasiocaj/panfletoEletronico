@@ -1,4 +1,5 @@
-var util = require('util');
+var util = require('util'),
+    moment = require('moment');
 
 // Find the src path
 var src = process.cwd() + '/src/';
@@ -23,10 +24,10 @@ module.exports.extractErrorInfo = function (err) {
 
     var messages = {
         required: "O campo '%s' é obrigatório.",
-        min   : "'%s' abaixo do valor mímino permitido, para o campo '%s'.",
-        max   : "'%s' acima do valor máximo permitido, para o campo '%s'.",
-        enum  : "'%s' não é um valor permitido, para o campo '%s'.",
-        unique: "Valor para o campo '%s' deve ser unique. Entre com outro diferente de '%s'."
+        min   : "O valor '%s' esta abaixo do valor mímino permitido, para o campo '%s'.",
+        max   : "O valor '%s' esta acima  do valor máximo permitido, para o campo '%s'.",
+        enum  : "O valor '%s' não é um valor permitido, para o campo '%s'.",
+        unique: "O campo '%s' deve ser unique. Entre com outro valor diferente de '%s'."
     };
     // A validation error can contain more than one error.
     var errInfo = [];
@@ -38,6 +39,7 @@ module.exports.extractErrorInfo = function (err) {
 
         // If we don't have a message for `type`, just push the error through
         if (!messages.hasOwnProperty(eProperties.type)) {
+            // TODO(diegoadolfo): Get error message if exist
             errInfo.push(util.format("Erro '%s' não esperado'", eProperties.type));
         // Otherwise, use util.format to format the message, and passing the path
         } else {
@@ -50,4 +52,8 @@ module.exports.extractErrorInfo = function (err) {
         }
     });
     return errInfo;
+};
+
+module.exports.dateFormatter = function(date) {
+    return moment(date).format('DD-MM-YYYY')
 };

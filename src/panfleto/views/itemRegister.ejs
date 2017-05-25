@@ -49,25 +49,25 @@
 				<div class="grid-agileits1">
 					<div class="form-control">
 						<label class="header">Título</label>
-						<input type="text" id="titulo" name="titulo" placeholder="Título" required="" value='<%= data.titulo %>'>
+						<input type="text" id="name" name="name" placeholder="Nome do Produto" required="" value='<%= data.name %>'>
 					</div>
 					<div class="form-control">
 						<label class="header">Descrição</label>
-						<input type="text" id="descricao" name="descricao" placeholder="Descrição" required="" value='<%= data.descricao %>'>
+						<input type="text" id="description" name="description" placeholder="Descrição" required="" value='<%= data.description %>'>
 					</div>
 					<div class="form-control">
 						<label class="header">Preço normal</label>
-						<input type="text" id="precoN" name="precoN" placeholder="$"value='<%= data.precoN %>'>
+						<input type="text" id="price" name="price" placeholder="$" value='<%= data.price %>'>
 					</div>
 					<div class="form-control">
 						<label class="header">Preço oferta</label>
-						<input type="text" id="precoO" name="precoO" placeholder="$" value='<%= data.precoO %>'>
+						<input type="text" id="newPrice" name="newPrice" placeholder="$" value='<%= data.newPrice %>'>
 					</div>
 				</div>
 			</div>
 			<div class="content-wthree2">
 				<label class="header">Imagem</label>
-				<input type="file" name="imagem" id="imagem" accept="image/*" class="form-control">
+				<input type="file" name="image" id="image" accept="image/*" class="form-control">
 			</div>
 			<div class="content-wthree3">
 				<div class="grid-w3layouts1">
@@ -75,17 +75,17 @@
 						<label class="header">Informe o tipo do item</label>
 						<ul>
 							<li>
-								<input type="radio" id="a-option" name="tipo" value='oferta'>
+								<input type="radio" id="a-option" name="type" value='offer'>
 								<label for="a-option">Oferta </label>
 								<div class="check"></div>
 							</li>
 							<li>
-								<input type="radio" id="b-option" name="tipo" value='promocao'>
+								<input type="radio" id="b-option" name="type" value='promotion'>
 								<label for="b-option">Promoção</label>
 								<div class="check"><div class="inside"></div></div>
 							</li>
 							<li>
-								<input type="radio" id="c-option" name="tipo" value='sorteio'>
+								<input type="radio" id="c-option" name="type" value='lottery'>
 								<label for="c-option">Sorteio</label>
 								<div class="check"><div class="inside"></div></div>
 							</li>
@@ -96,7 +96,7 @@
 			<div class="w3ls-btn">
 				<div class="contact-forms">
 					<div class="wthreesubmitaits">
-						<input type="submit" name="submit" value="Cadastrar">
+						<input type="submit" value="Cadastrar">
 					</div>
 				</div>
 			</div>

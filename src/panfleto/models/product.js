@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
     exists = require('mongoose-exists'),
     validator = require('mongoose-validator'),
+    uniqueValidator = require('mongoose-unique-validator'),
     Schema = mongoose.Schema;
 
 // Find the src path
@@ -31,8 +32,7 @@ var ProductSchema = new Schema({
         type: String,
         required: true,
         validate: validator({
-            validator: 'isFloat', arguments: { min: 0 }, message: 'Invalid Product Price'
-        })
+            validator: 'isFloat', arguments: { min: 0 }, message: 'Invalid Product Price'})
     },
 
     barCode: {
@@ -56,6 +56,10 @@ ProductSchema.methods.toJSON = function () {
         barCode    : this.barCode
     }
 };
+
+// Applying plugins to schema
+ProductSchema.plugin(exists);
+ProductSchema.plugin(uniqueValidator);
 
 
 module.exports = mongoose.model('Product', ProductSchema);

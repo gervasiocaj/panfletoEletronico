@@ -56,6 +56,14 @@
 						<input type="text" id="description" name="description" placeholder="Descrição" required="" value='<%= data.description %>'>
 					</div>
 					<div class="form-control">
+						<label class="header">Data de início</label>
+						<input type="date" id="startDate" name="startDate" placeholder="Data de início" value='<%= data.startDate %>'>
+					</div>
+					<div class="form-control">
+						<label class="header">Data de fim</label>
+						<input type="date" id="endDate" name="endDate" placeholder="Data de fim" value='<%= data.endDate %>'>
+					</div>
+          				<div class="form-control">
 						<label class="header">Preço normal</label>
 						<input type="text" id="price" name="price" placeholder="$" value='<%= data.price %>'>
 					</div>

@@ -174,7 +174,7 @@ ul.w3-size li.white{
 	background:#fff;
 	height:50px;
 }
-input#titulo, input#descricao, input#precoN, input#precoO, input#email, input#orgn, textarea#message {
+input#titulo, input#descricao, input#precoN, input#precoO, input#dataIni, input#dataFim, input#email, input#orgn, textarea#message {
     border: none;
     color: #fff;
     text-align: justify;
@@ -186,7 +186,7 @@ input#titulo, input#descricao, input#precoN, input#precoO, input#email, input#or
 	    margin-bottom: 16px;
 
 }
-input#titulo, input#descricao, input#precoN, input#precoO,input#email,input#orgn {
+input#titulo, input#descricao, input#precoN, input#precoO, input#dataIni, input#dataFim,input#email,input#orgn {
 	height:40px;
 	padding:0 15px;
 	width:92.2%;
@@ -471,7 +471,7 @@ p.copyright a:hover {
 
 /*-- responsive design --*/
 @media (max-width:1440px) {
-	input#titulo, input#descricao, input#precoN, input#precoO, input#email, input#orgn,.tickets input[type="number"] {
+	input#titulo, input#descricao, input#precoN, input#precoO, input#dataIni, input#dataFim, input#email, input#orgn,.tickets input[type="number"] {
     width: 94%;
 }
 	select {
@@ -506,7 +506,7 @@ p.copyright a:hover {
 @media (max-width: 900px) {
 }
 @media (max-width: 800px) {
-input#titulo, input#descricao, input#precoN, input#precoO, input#email, input#orgn,.tickets input[type="number"] {
+input#titulo, input#descricao, input#precoN, input#precoO, input#dataIni, input#dataFim, input#email, input#orgn,.tickets input[type="number"] {
     width: 93%;
 }
 }
@@ -514,7 +514,7 @@ input#titulo, input#descricao, input#precoN, input#precoO, input#email, input#or
 h1.header-w3ls {
     font-size: 40px;
 }
-input#titulo, input#descricao, input#precoN, input#precoO, input#email, input#orgn,.tickets input[type="number"] {
+input#titulo, input#descricao, input#precoN, input#precoO, input#dataIni, input#dataFim, input#email, input#orgn,.tickets input[type="number"] {
     width: 93%;
 }
 select {
@@ -533,10 +533,10 @@ select {
     margin: 20px auto 40px;
     padding: 35px 35px;
 }
-input#titulo, input#descricao, input#precoN, input#precoO, input#email, input#orgn,.tickets input[type="number"] {
+input#titulo, input#descricao, input#precoN, input#precoO, input#dataIni, input#dataFim, input#email, input#orgn,.tickets input[type="number"] {
     width: 93%;
 }
-input#titulo, input#descricao, input#precoN, input#precoO, input#email, input#orgn,.tickets input[type="number"] {
+input#titulo, input#descricao, input#precoN, input#precoO, input#dataIni, input#dataFim, input#email, input#orgn,.tickets input[type="number"] {
     width: 93%;
 }
 h1.header-w3ls {
@@ -572,7 +572,7 @@ h1.header-w3ls {
 .content-w3ls {
     width: 65%;
 }
-input#titulo, input#descricao, input#precoN, input#precoO, input#email, input#orgn,.tickets input[type="number"] {
+input#titulo, input#descricao, input#precoN, input#precoO, input#dataIni, input#dataFim, input#email, input#orgn,.tickets input[type="number"] {
     width: 92%;
 }
  select{
@@ -615,7 +615,7 @@ h1.header-w3ls {
 p.copyright {
     padding: 0 10px;
 }
-input#titulo, input#descricao, input#precoN, input#precoO, input#email, input#orgn,.tickets input[type="number"] {
+input#titulo, input#descricao, input#precoN, input#precoO, input#dataIni, input#dataFim, input#email, input#orgn,.tickets input[type="number"] {
     width: 89.5%;
 }
 }
@@ -625,7 +625,7 @@ input#titulo, input#descricao, input#precoN, input#precoO, input#email, input#or
 	h1.header-w3ls {
     font-size: 20px;
 }
-input#titulo, input#descricao, input#precoN, input#precoO, input#email, input#orgn, .tickets input[type="number"] {
+input#titulo, input#descricao, input#precoN, input#precoO, input#dataIni, input#dataFim, input#email, input#orgn, .tickets input[type="number"] {
     width: 87.5%;
 }
 .form-control {

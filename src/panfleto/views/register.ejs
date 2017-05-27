@@ -1,80 +1,69 @@
-<!DOCTYPE html>
-<html>
+<%- include outBase.ejs %>
 
-<!-- Head -->
-<head>
+<h1>Cadastro</h1>
 
-<title>Panfleto Eletrônico</title>
+<h2>Cadastre sua conta</h2>
+<div class="w3layoutscontaineragileits">
 
-<!-- Meta-Tags -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="keywords" content="Sleek Login Form Widget Responsive, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- //Meta-Tags -->
+	<% if(locals.error) { %>
+	<div class="alert alert-danger">
+		<strong>Atenção!</strong>
+		<ul>
+			<li>
+				<%= error.message %>
+			</li>
+		</ul>
+	</div>
+	<% } %>
 
-<!-- Style --> <link rel="stylesheet" href="css/style1.css" type="text/css" media="all">
+	<% if (locals.success) { %>
+	<div class="alert alert-info">
+		<ul>
+			<li>
+				<%= success.message %>
+			</li>
+		</ul>
+	</div>
+	<% } %>
 
-<!-- Fonts -->
-<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-<!-- //Fonts -->
+	<form action='/market' method='post'>
 
-</head>
-<!-- //Head -->
-
-<!-- Body -->
-<body background="images/background.jpg">
-
-	<h1>Cadastro</h1>
-
-	<h2>Cadastre sua conta</h2>
-	<div class="w3layoutscontaineragileits">
-
-		<% if(locals.error) { %>
-		<div class="alert alert-danger">
-			<strong>Atenção!</strong>
-			<ul>
-				<li>
-					<%= error.message %>
-				</li>
-			</ul>
-		</div>
-		<% } %>
-
-        <% if (locals.success) { %>
-		<div class="alert alert-info">
-			<ul>
-				<li>
-                    <%= success.message %>
-				</li>
-			</ul>
-		</div>
-        <% } %>
-
-		<form action='/market' method='post'>
-
+		<div class='personalData'>
+			<h3>Dados pessoais</h2>
 			<input type="text" name="login" placeholder="Administrador" required="" value='<%= data.login %>'>
 			<input type="text" name="company" placeholder="Empresa" required="" value='<%= data.company %>'>
+			<input type="text" name="email" placeholder="Email" required="" value='<%= data.email %>'>
 			<input type="password" name="password" placeholder="Senha" required="" value='<%= data.password %>'>
 			<input type="password" name="passconf" placeholder="Repita a senha" required="" value='<%= data.confpass %>'>
+		</div>
 
-			<div class="aitssendbuttonw3ls">
-				<div>
-					<input type="submit" value="REGISTRAR">
-				</div>
+		<div class='addressData'>
+			<h3>Endereço</h2>
+			<input type="text" name="address" placeholder="Endereço" required="" value='<%= data.address %>'>
+			<input type="text" name="postalCode" placeholder="CEP" required="" value='<%= data.postalCode %>'>
+			<input type="text" name="city" placeholder="Cidade" required="" value='<%= data.city %>'>
+			<input type="text" name="state" placeholder="Estado" required="" value='<%= data.state %>'>
+			<input type="text" name="country" placeholder="Pais" required="" value='<%= data.country %>'>
+		</div>
 
-				<div>
-					<p><a href="/login">CANCELAR<span>→</span></a></p>
-				</div>
+		<div class='networkData'>
+			<h3>Rede</h2>
+			<input type="text" name="networkName" placeholder="Nome da rede" required="" value='<%= data.networkName %>'>
+			<input type="text" name="networkPassword" placeholder="Senha da rede" required="" value='<%= data.networkPassword %>'>
+		</div>
+
+		<div class="aitssendbuttonw3ls">
+			<div>
+				<input type="submit" value="REGISTRAR">
 			</div>
-		</form>
-	</div>
 
-	<div class="w3footeragile">
-		<p> Panfleto Eletrônico <a target="_blank"></a></p>
-	</div>
+			<div>
+				<p><a href="/login">CANCELAR<span>→</span></a></p>
+			</div>
+		</div>
+	</form>
+</div>
 
-</body>
-<!-- //Body -->
-
-</html>
+<div class="w3footeragile">
+	<p> Panfleto Eletrônico <a target="_blank"></a></p>
+</div>

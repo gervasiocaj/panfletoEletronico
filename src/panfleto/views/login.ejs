@@ -1,79 +1,49 @@
-<!DOCTYPE html>
-<html>
+<%- include outBase.ejs %>
 
-<!-- Head -->
-<head>
+<h1>PANFLETO ELETRÔNICO</h1>
 
-<title>Panfleto Eletrônico</title>
+<h2>Acesse sua conta</h2>
+<div class="w3layoutscontaineragileits">
 
-<!-- Meta-Tags -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="keywords" content="Sleek Login Form Widget Responsive, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- //Meta-Tags -->
+	<% if (locals.error) { %>
+	<div class="alert alert-danger">
+		<strong>Atenção!</strong>
+		<ul>
+			<li>
+				<%= error.message %>
+			</li>
+		</ul>
+	</div>
+	<% } %>
 
-<!-- Style --> <link rel="stylesheet" href="css/style1.css" type="text/css" media="all">
+	<% if (locals.success) { %>
+	<div class="alert alert-info">
+		<ul>
+			<li>
+				<%= success.message %>
+			</li>
+		</ul>
+	</div>
+	<% } %>
 
-<!-- Fonts -->
-<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-<!-- //Fonts -->
+	<form action='/login' method='post'>
 
-</head>
-<!-- //Head -->
+		<input type="text" Name="login" placeholder="Administrador" required="" value='<%= data.login %>'>
+		<input type="password" Name="password" placeholder="Senha" required="" value='<%= data.password %>'>
 
-<!-- Body -->
-<body background="images/background.jpg">
-
-	<h1>PANFLETO ELETRÔNICO</h1>
-
-	<h2>Acesse sua conta</h2>
-	<div class="w3layoutscontaineragileits">
-
-		<% if (locals.error) { %>
-		<div class="alert alert-danger">
-			<strong>Atenção!</strong>
-			<ul>
-				<li>
-					<%= error.message %>
-				</li>
-			</ul>
-		</div>
-		<% } %>
-
-		<% if (locals.success) { %>
-		<div class="alert alert-info">
-			<ul>
-				<li>
-					<%= success.message %>
-				</li>
-			</ul>
-		</div>
-		<% } %>
-
-		<form action='/login' method='post'>
-
-			<input type="text" Name="login" placeholder="Administrador" required="" value='<%= data.login %>'>
-			<input type="password" Name="password" placeholder="Senha" required="" value='<%= data.password %>'>
-
-			<div class="aitssendbuttonw3ls">
-				<div>
-					<input type="submit" value="LOGIN">
-				</div>
-
-				<div>
-					<p><a href="/register">CADASTRAR<span>→</span></a></p>
-				</div>
+		<div class="aitssendbuttonw3ls">
+			<div>
+				<input type="submit" value="LOGIN">
 			</div>
 
-		</form>
-	</div>
+			<div>
+				<p><a href="/register">CADASTRAR<span>→</span></a></p>
+			</div>
+		</div>
 
-	<div class="w3footeragile">
-		<p> Panfleto Eletrônico <a target="_blank"></a></p>
-	</div>
+	</form>
+</div>
 
-</body>
-<!-- //Body -->
-
-</html>
+<div class="w3footeragile">
+	<p> Panfleto Eletrônico <a target="_blank"></a></p>
+</div>

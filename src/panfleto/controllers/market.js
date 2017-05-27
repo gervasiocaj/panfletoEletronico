@@ -24,7 +24,7 @@ module.exports.signUp = function (req, res) {
 
 	market.save()
 		.then(function (market) {
-			req.flash('message', 'Empresa cadastrada com sucesso!');
+			req.flash('message', ['Empresa cadastrada com sucesso!']);
 
 			return res.redirect('/login');
     })

@@ -23,7 +23,7 @@ module.exports.signIn = function (req, res, next) {
             if (err) {
                 return next(err);
             }
-            req.flash('message', "Conectado com o login '%s' em %s".format(market.login, market.company));
+            req.flash('message', ["Conectado com o login '%s' em %s".format(market.login, market.company)]);
             res.redirect('/item')
         });
     })(req, res, next);

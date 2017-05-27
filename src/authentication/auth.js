@@ -33,15 +33,15 @@ passport.use(new LocalStrategy({
         var message;
         Market.findOne( {$or: [{ login: login }, { email: login }]}, function (err, market) {
             if (err) {
-                req.flash('message', 'Erro interno no banco de dados');
+                req.flash('message', ['Erro interno no banco de dados']);
                 return done(err);
             }
             if (!market) {
-                req.flash('message', 'Empresa não encontrada com login ou email: ' + login);
+                req.flash('message', ['Empresa não encontrada com login ou email: ' + login]);
                 return done(null, false);
             }
             if (!market.checkPassword(password)) {
-                req.flash('message', 'Senha incorreta!');
+                req.flash('message', ['Senha incorreta!']);
                 return done(null, false);
             }
             return done(null, market);
@@ -55,7 +55,7 @@ passport.isAuthenticated = function () {
         if (req.isAuthenticated())
             return next();
 
-        req.flash('message', 'Faça login para acessar o conteúdo do site');
+        req.flash('message', ['Faça login para acessar o conteúdo do site']);
         res.locals.error = req.flash();
 
         res.render('login', {data: {}});

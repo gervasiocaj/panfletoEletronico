@@ -20,7 +20,7 @@ module.exports.create = function (req, res) {
     var data = req.body;
 
     if (!data.type) {
-        req.flash('message', "O tipo do item deve ser selecionado, escolha entre 'oferta' e 'promoção'");
+        req.flash('message', ["O tipo do item deve ser selecionado, escolha entre 'oferta' e 'promoção'"]);
         return res.redirect('/item');
     }
     if (data.type === 'offer') {
@@ -41,15 +41,17 @@ module.exports.create = function (req, res) {
     item.marketId = req.user;
     item.save()
         .then(function (item) {
-            req.flash('message', 'Promoção ou Oferta registrada com sucesso!');
+            req.flash('message', ['Promoção ou Oferta registrada com sucesso!']);
             return res.redirect('/item');
         })
         .catch(function (err) {
-            Image.findByIdAndRemove(image._id, function (err) {
-                if (err)
+            if (req.file) {
+                Image.findByIdAndRemove(image._id, function (err) {
+                    if (err)
                     // TODO(diegoadolfo): create a service to fix this problem
-                    log.warn("Cannot remove image by id " + image._id + " , it's will stay orphan in BD, please check this!");
-            });
+                        log.warn("Cannot remove image by id " + image._id + " , it's will stay orphan in BD, please check this!");
+                });
+            }
             req.flash('message', utils.extractErrorInfo(err));
 
             res.locals.error = req.flash();

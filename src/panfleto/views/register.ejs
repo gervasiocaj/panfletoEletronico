@@ -28,7 +28,7 @@
 
 	<form action='/market' method='post'>
 
-		<div class='personalData'>
+		<div class='row personalData'>
 			<h3>Dados pessoais</h2>
 			<input type="text" name="login" placeholder="Administrador" required="" value='<%= data.login %>'>
 			<input type="text" name="company" placeholder="Empresa" required="" value='<%= data.company %>'>
@@ -37,16 +37,22 @@
 			<input type="password" name="passconf" placeholder="Repita a senha" required="" value='<%= data.confpass %>'>
 		</div>
 
-		<div class='addressData'>
+		<div class='row addressData'>
 			<h3>Endereço</h2>
-			<input type="text" name="address" placeholder="Endereço" required="" value='<%= data.address %>'>
-			<input type="text" name="postalCode" placeholder="CEP" required="" value='<%= data.postalCode %>'>
+				<input type="text" name="address" placeholder="Endereço" required="" value='<%= data.address %>'>
+				<div class='col-md-7'>
+					<input type="text" name="postalCode" placeholder="CEP" required="" value='<%= data.postalCode %>'>
+				</div>
+				<div class='col-md-4'>
+					<input type="text" name="addressNum" placeholder="Número" required="" value='<%= data.addressNum %>'>
+				</div>
+
 			<input type="text" name="city" placeholder="Cidade" required="" value='<%= data.city %>'>
 			<input type="text" name="state" placeholder="Estado" required="" value='<%= data.state %>'>
 			<input type="text" name="country" placeholder="Pais" required="" value='<%= data.country %>'>
 		</div>
 
-		<div class='networkData'>
+		<div class='row networkData'>
 			<h3>Rede</h2>
 			<input type="text" name="networkName" placeholder="Nome da rede" required="" value='<%= data.networkName %>'>
 			<input type="text" name="networkPassword" placeholder="Senha da rede" required="" value='<%= data.networkPassword %>'>

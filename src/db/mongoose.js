@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    exists   = require('mongoose-exists');
 
 // Find project working directory
 var src = process.cwd() + '/src/';
@@ -27,5 +28,8 @@ mongoose.connection.once('open', function callback () {
     mongoose.Promise = global.Promise;
     log.info('Connection with MongoDB established with success!');
 });
+
+// Apply mongoose-exists plugin to mongoose
+mongoose.plugin(exists);
 
 module.exports = mongoose;

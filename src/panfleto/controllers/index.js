@@ -1,4 +1,3 @@
-var util = require('util');
 var passport = require('passport');
 
 module.exports.home = function(req, res){
@@ -24,7 +23,7 @@ module.exports.signIn = function (req, res, next) {
             if (err) {
                 return next(err);
             }
-            req.flash('message', util.format("Conectado com o login '%s' em %s", market.login, market.company));
+            req.flash('message', "Conectado com o login '%s' em %s".format(market.login, market.company));
             res.redirect('/item')
         });
     })(req, res, next);

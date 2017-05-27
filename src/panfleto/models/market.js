@@ -54,7 +54,9 @@ MarketSchema.virtual('password')
         // this.salt = crypto.randomBytes(128).toString('hex');
         this.hashedPassword = this.encryptPassword(password);
     })
-    .get(function() { return this.decryptPassword(); });
+    .get(function() {
+        return this.decryptPassword()
+    });
 
 
 MarketSchema.methods.encryptPassword = function(password) {

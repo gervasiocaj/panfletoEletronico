@@ -70,6 +70,15 @@ var OfferSchema = Product.schema.extend({
     collection: 'promotions'
 });
 
+OfferSchema.virtual('vNewPrice')
+    .get(function () {
+        return this.newPrice;
+    })
+    .set(function (price) {
+        this.newPrice = price.replaceAll(',', '.')
+    });
+
+
 OfferSchema.methods.toJSON = function () {
     return {
         _id        : this._id,

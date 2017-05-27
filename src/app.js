@@ -9,6 +9,9 @@ var path = require('path'),
     cookieParser = require('cookie-parser'),
     methodOverride = require('method-override');
 
+// Extend default prototypes
+require('prototypes');
+
 var app = express(),
     src = process.cwd() + '/src/';
 

@@ -1,10 +1,4 @@
-var util = require('util'),
-    moment = require('moment');
-
-// Find the src path
-var src = process.cwd() + '/src/';
-
-var log = require(src + 'helpers/logging')(module);
+var moment = require('moment');
 
 module.exports.passwordValidator = function (password, passconf) {
     var message;
@@ -37,18 +31,19 @@ module.exports.extractErrorInfo = function (err) {
         var eObj = err.errors[field],
             eProperties = eObj.properties;
 
+        if (eProperties.type === 'user defined') {
+            errInfo.push(eProperties.message)
         // If we don't have a message for `type`, just push the error through
-        if (!messages.hasOwnProperty(eProperties.type)) {
-            // TODO(diegoadolfo): Get error message if exist
-            errInfo.push(util.format("Erro '%s' não esperado'", eProperties.type));
+        } else if (!messages.hasOwnProperty(eProperties.type)) {
+            errInfo.push("Erro '%s' não esperado'".format(eProperties.type));
         // Otherwise, use util.format to format the message, and passing the path
         } else {
             if (eProperties.type === 'required')
-                errInfo.push(util.format(messages[eProperties.type], eProperties.path));
+                errInfo.push(messages[eProperties.type].format(eProperties.path));
             else if (eProperties.type === 'unique')
-                errInfo.push(util.format(messages[eProperties.type], eProperties.path, eProperties.value));
+                errInfo.push(messages[eProperties.type].format(eProperties.path, eProperties.value));
             else
-                errInfo.push(util.format(messages[eProperties.type], eProperties.value, eProperties.path));
+                errInfo.push(messages[eProperties.type].format(eProperties.value, eProperties.path));
         }
     });
     return errInfo;

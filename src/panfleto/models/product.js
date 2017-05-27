@@ -1,5 +1,4 @@
 var mongoose = require('mongoose'),
-    exists = require('mongoose-exists'),
     validator = require('mongoose-validator'),
     uniqueValidator = require('mongoose-unique-validator'),
     Schema = mongoose.Schema;
@@ -32,7 +31,8 @@ var ProductSchema = new Schema({
         type: String,
         required: true,
         validate: validator({
-            validator: 'isFloat', arguments: { min: 0 }, message: 'Invalid Product Price'})
+            validator: 'isFloat', arguments: { min: 0 },
+            message  : 'O preço do produto deve ser um número real positivo'})
     },
 
     barCode: {
@@ -46,6 +46,14 @@ var ProductSchema = new Schema({
     discriminatorKey: '_type'
 });
 
+ProductSchema.virtual('vPrice')
+    .get(function () {
+        return this.price;
+    })
+    .set(function (price) {
+        this.price = price.replaceAll(',', '.')
+    });
+
 ProductSchema.methods.toJSON = function () {
     return {
         _id        : this._id,
@@ -58,7 +66,6 @@ ProductSchema.methods.toJSON = function () {
 };
 
 // Applying plugins to schema
-ProductSchema.plugin(exists);
 ProductSchema.plugin(uniqueValidator);
 
 

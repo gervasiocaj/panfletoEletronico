@@ -53,7 +53,7 @@ module.exports.create = function (req, res) {
             req.flash('message', utils.extractErrorInfo(err));
 
             res.locals.error = req.flash();
-            return res.render('ItemRegister', { data: data })
+            return res.render('itemRegister', { data: data })
         })
         .then(function () {
             fs.unlinkSync(req.file.path);

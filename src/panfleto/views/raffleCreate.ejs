@@ -1,0 +1,65 @@
+<%- include inBase.ejs %>
+
+<h1 class="header-w3ls">Cadastro de sorteio</h1>
+<div class="content-w3ls">
+
+	<% if (locals.error) { %>
+	<div class="alert alert-danger">
+		<strong>Atenção!</strong>
+		<ul>
+			<li>
+				<%= error.message %>
+			</li>
+
+		</ul>
+	</div>
+	<% } %>
+
+  <% if (locals.success) { %>
+	<div class="alert alert-info">
+		<ul>
+			<li>
+        <%= success.message %>
+			</li>
+		</ul>
+	</div>
+  <% } %>
+
+	<div class="form-w3ls">
+		<form action='/item' method='post' enctype='multipart/form-data'>
+			<div class="content-wthree1">
+				<div class="grid-agileits1">
+					<div class="form-control">
+						<label class="header">Título</label>
+						<input type="text" id="name" name="name" placeholder="Nome do Produto" required="" value='<%= data.name %>'>
+					</div>
+					<div class="form-control">
+						<label class="header">Descrição</label>
+						<input type="text" id="description" name="description" placeholder="Descrição" required="" value='<%= data.description %>'>
+					</div>
+					<div class="form-control">
+						<label class="header">Data de início</label>
+						<input type="date" id="startDate" name="startDate" placeholder="Data de início" value='<%= data.startDate %>'>
+					</div>
+					<div class="form-control">
+						<label class="header">Data de fim</label>
+						<input type="date" id="endDate" name="endDate" placeholder="Data de fim" value='<%= data.endDate %>'>
+					</div>
+				</div>
+			</div>
+			<div class="content-wthree2">
+				<label class="header">Imagem</label>
+				<input type="file" name="image" id="image" accept="image/*" class="form-control">
+			</div>
+			<div class="w3ls-btn">
+				<div class="contact-forms">
+					<div class="wthreesubmitaits">
+						<input type="submit" value="Cadastrar">
+						<input type="submit" value="Cancelar">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<p class="copyright">Panfleto Eletrônico</p>

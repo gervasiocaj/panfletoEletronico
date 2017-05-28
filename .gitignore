@@ -62,3 +62,6 @@ typings/
 
 # Upload folder images
 public/uploads/*
+
+# Meld files
+*.orig

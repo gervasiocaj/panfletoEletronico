@@ -9,7 +9,10 @@ var utils = require(src + 'helpers/utils'),
     Offer = require(src + 'panfleto/models/offer');
 
 module.exports.view = function(req, res) {
-    res.locals.success = req.flash();
+    var flash = req.flash();
+
+    if (flash.hasProperties())
+        res.locals.succezz = flash;
 
     /* Render itemRegister page */
     res.render('itemRegister', {data : {}});

@@ -9,21 +9,21 @@
 	<div class="alert alert-danger">
 		<strong>Atenção!</strong>
 		<ul>
-            <% Object.keys(locals.error.message).forEach( function (idx) { %>
+            <% Object.keys(error.message).forEach( function (idx) { %>
 			<li>
-                <%= locals.error.message[idx] %>
+                <%= error.message[idx] %>
 			</li>
             <% }); %>
 		</ul>
 	</div>
     <% } %>
 
-    <% if (locals.success) { %>
+    <% if (locals.succezz) { %>
 	<div class="alert alert-info">
 		<ul>
-            <% Object.keys(locals.success.message).forEach(function (idx) { %>
+            <% Object.keys(succezz.message).forEach(function (idx) { %>
 			<li>
-                <%= locals.success.message[idx] %>
+                <%= succezz.message[idx] %>
 			</li>
             <% }); %>
 		</ul>

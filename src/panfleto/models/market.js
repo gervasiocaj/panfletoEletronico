@@ -4,12 +4,31 @@ var crypto = require('crypto'),
     uniqueValidator = require('mongoose-unique-validator'),
     Schema = mongoose.Schema;
 
+// Find the src path
+var src = process.cwd() + '/src/';
+
+var log = require(src + 'helpers/logging')(module);
+
+// Load Models
+var Address = require(src + 'panfleto/models/address');
+
+// Custom validator functions
+validator.extend('chkNetworkSize',
+    function (networks) { return networks.length > 0 }, 'Network array is empty'
+);
+
+
 var MarketSchema = new Schema({
 
     login: {
         type: String,
         unique: true,
         required: true
+    },
+
+    company: {
+        type: String,
+        require: true
     },
 
     email: {
@@ -19,17 +38,36 @@ var MarketSchema = new Schema({
         validate: validator({validator: 'isEmail', message: 'Endereço de email inválido'})
     },
 
-    company: {
-        type: String,
-        require: true
-    },
-
-    hashedPassword: {
+    hash: {
         type: String
     },
 
     salt: {
         type: String
+    },
+
+    address: {
+        type: Schema.Types.ObjectId,
+        ref: 'Address',
+        required: true,
+        exists: true
+    },
+
+    networks: {
+        type: [{
+            name: {
+                type: String,
+                required: true
+            },
+            password: {
+                type: String,
+                required: true
+            }
+        }],
+        validate: validator({
+            validator: 'chkNetworkSize',
+            message  : 'É necessário infomar pelo menos uma rede para o acesso dos clientes dentro no mercado'
+        })
     },
 
     created: {
@@ -52,7 +90,7 @@ MarketSchema.virtual('password')
         
         // More secure
         // this.salt = crypto.randomBytes(128).toString('hex');
-        this.hashedPassword = this.encryptPassword(password);
+        this.hash = this.encryptPassword(password);
     })
     .get(function() {
         return this.decryptPassword()
@@ -72,14 +110,29 @@ MarketSchema.methods.encryptPassword = function(password) {
 
 MarketSchema.methods.decryptPassword = function () {
     var decipher = crypto.createDecipher('aes-256-cbc-hmac-sha1', this.salt),
-        dec      = decipher.update(this.hashedPassword, 'hex', 'utf8');
+        dec      = decipher.update(this.hash, 'hex', 'utf8');
 
     return dec + decipher.final('utf8');
 };
 
 MarketSchema.methods.checkPassword = function(password) {
-    return this.encryptPassword(password) === this.hashedPassword;
+    return this.encryptPassword(password) === this.hash;
 };
+
+// Register cascading actions
+MarketSchema.pre('save', function (next) {
+    var nestedAddress = this.address;
+
+    nestedAddress.save()
+        .then(function (address) {
+            log.info('Market address save with success!');
+            next()
+        })
+        .catch(function (err) {
+            log.error('Error to save market address, please check this!');
+            next(err)
+        });
+});
 
 // Applying plugins to schema
 MarketSchema.plugin(uniqueValidator);

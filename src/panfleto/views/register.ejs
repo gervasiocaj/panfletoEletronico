@@ -5,51 +5,79 @@
 <h2>Cadastre sua conta</h2>
 <div class="w3layoutscontaineragileits">
 
-	<% if(locals.error) { %>
+    <% if (locals.error) { %>
 	<div class="alert alert-danger">
 		<strong>Atenção!</strong>
 		<ul>
+            <% Object.keys(error.message).forEach( function (idx) { %>
 			<li>
-				<%= error.message %>
+                <%= error.message[idx] %>
 			</li>
+            <% }); %>
 		</ul>
 	</div>
-	<% } %>
+    <% } %>
 
-	<% if (locals.success) { %>
+    <% if (locals.succezz) { %>
 	<div class="alert alert-info">
 		<ul>
+            <% Object.keys(succezz.message).forEach(function (idx) { %>
 			<li>
-				<%= success.message %>
+                <%= succezz.message[idx] %>
 			</li>
+            <% }); %>
 		</ul>
 	</div>
-	<% } %>
+    <% } %>
 
-	<form action='/market' method='post'>
+	<form action='/register' method='post'>
 
 		<div class='personalData'>
-			<h3>Dados pessoais</h2>
-			<input type="text" name="login" placeholder="Administrador" required="" value='<%= data.login %>'>
-			<input type="text" name="company" placeholder="Empresa" required="" value='<%= data.company %>'>
-			<input type="text" name="email" placeholder="Email" required="" value='<%= data.email %>'>
-			<input type="password" name="password" placeholder="Senha" required="" value='<%= data.password %>'>
-			<input type="password" name="passconf" placeholder="Repita a senha" required="" value='<%= data.confpass %>'>
+			<h3>Dados pessoais</h3>
+			<input type="text" placeholder="Administrador" name="login" value='<%= data.login %>' required>
+			<input type="text" placeholder="Empresa" name="company" value='<%= data.company %>' required>
+			<input type="text" placeholder="Email" name="email" value='<%= data.email %>' required>
+			<input type="password" placeholder="Senha" name="password" value='<%= data.password %>' required>
+			<input type="password" placeholder="Repita a senha" name="passconf" value='<%= data.passconf %>' required>
 		</div>
 
 		<div class='addressData'>
-			<h3>Endereço</h2>
-			<input type="text" name="address" placeholder="Endereço" required="" value='<%= data.address %>'>
-			<input type="text" name="postalCode" placeholder="CEP" required="" value='<%= data.postalCode %>'>
-			<input type="text" name="city" placeholder="Cidade" required="" value='<%= data.city %>'>
-			<input type="text" name="state" placeholder="Estado" required="" value='<%= data.state %>'>
-			<input type="text" name="country" placeholder="Pais" required="" value='<%= data.country %>'>
+			<h3>Endereço</h3>
+			<input type="text" placeholder="Endereço"
+				   name="address[street]" <% if (data.address) {%> value='<%= data.address.street %>' <% } %>
+				   required
+			>
+			<input type="text" placeholder="Número"
+				   name="address[number]" <% if (data.address) {%> value='<%= data.address.number %>' <% } %>
+			>
+			<input type="text" placeholder="Cidade"
+				   name="address[city]" <% if (data.address) { %> value='<%= data.address.city %>' <% } %>
+				   required
+			>
+			<input type="text" placeholder="Estado"
+				   name="address[province]" <% if (data.address) { %> value='<%= data.address.province %>' <% } %>
+				   required
+			>
+			<input type="text" placeholder="País"
+				   name="address[country]" <% if (data.address) { %> value='<%= data.address.country %>' <% } %>
+				   required
+			>
+			<input type="text" placeholder="CEP"
+				   name="address[postalCode]" <% if (data.address) { %> value='<%= data.address.postalCode %>' <% } %>
+			>
 		</div>
 
 		<div class='networkData'>
-			<h3>Rede</h2>
-			<input type="text" name="networkName" placeholder="Nome da rede" required="" value='<%= data.networkName %>'>
-			<input type="text" name="networkPassword" placeholder="Senha da rede" required="" value='<%= data.networkPassword %>'>
+			<h3>Rede</h3>
+			<% if (data.networks) { %>
+			<% Object.keys(data.networks).forEach(function (i) { %>
+			<input type="text" placeholder="Nome da rede" name="networks[][name]" value='<%= data.networks[i].name %>' required>
+			<input type="password" placeholder="Senha da rede" name="networks[][password]" value='<%= data.networks[i].password %>' required>
+			<% }) %>
+			<% } else { %>
+			<input type="text" placeholder="Nome da rede" name="networks[][name]" value='' required>
+			<input type="password" placeholder="Senha da rede" name="networks[][password]" value='' required>
+			<% } %>
 		</div>
 
 		<div class="aitssendbuttonw3ls">

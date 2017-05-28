@@ -8,6 +8,6 @@ var src = process.cwd() + '/src/';
 var controller = require(src + 'panfleto/controllers/market');
 
 /* POST request for create a market into application */
-router.post('/', controller.signUp);
+router.post('/register', controller.signUp);
 
 module.exports = router;

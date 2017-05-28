@@ -5,7 +5,10 @@ module.exports.home = function(req, res){
 };
 
 module.exports.login = function (req, res) {
-    res.locals.success = req.flash();
+    var flash = req.flash();
+
+    if (flash.hasProperties())
+        res.locals.succezz = flash;
 
     /* Render login page */
     res.render('login', {data: {}});

@@ -2,13 +2,16 @@
 var src = process.cwd() + '/src/';
 
 // Load Models
-var Market = require(src + 'panfleto/models/market'),
-	utils  = require(src + 'helpers/utils');
+var Market  = require(src + 'panfleto/models/market'),
+	Address = require(src + 'panfleto/models/address'),
+	utils   = require(src + 'helpers/utils');
 
 module.exports.signUp = function (req, res) {
 	var data = req.body;
+    // Nested Objects of Market in data
+    var address  = data.address;
 
-	// Validate password field
+    // Validate password field
 	var passwordInvalid = utils.passwordValidator(data.password, data.passconf);
     delete data.passconf;
 
@@ -19,8 +22,10 @@ module.exports.signUp = function (req, res) {
         delete data.password;
         return res.render('register', { data: data });
 	}
-
+	delete data.address;
     var market = new Market(data);
+	// Referencing nested address object into Market
+	market.address = new Address(address);
 
 	market.save()
 		.then(function (market) {
@@ -34,6 +39,7 @@ module.exports.signUp = function (req, res) {
 			res.locals.error = req.flash();
 
 			delete data.password;
+			data.address = address;
 			return res.render('register', { data: data })
 	})
 };

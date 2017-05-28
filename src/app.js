@@ -30,7 +30,7 @@ app.use(morgan('dev'));
 app.use(methodOverride());
 // Get information from html forms and JSON parsing
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(favicon(path.join(__dirname, '../public', 'images/favicon.ico')));
@@ -58,7 +58,7 @@ var api = require('./api/routes/api');
 
 // Register routes
 app.use('/', login);
-app.use('/market', market);
+app.use('/', market);
 app.use('/item', item);
 app.use('/api', api);
 

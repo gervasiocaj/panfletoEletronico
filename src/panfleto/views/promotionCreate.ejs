@@ -51,10 +51,19 @@
 					</div>
 				</div>
 			</div>
-			<div class="content-wthree2">
-				<label class="header">Imagem</label>
-				<input type="file" name="image" id="image" accept="image/*" class="form-control">
+
+			<div>
+        <label class="header">Imagem</label>
+        <img src="images/no_image.png"
+          class="image"  id="displayImage"  style="max-width: 250px; max-height: 250px;"/>
+        <div>
+          <input type="file" name="image" id="image" accept="image/*" class="form-control">
+        </div>
+        <div>
+          <input type="submit" id="cancelImage" value="Cancelar seleção">
+        </div>
 			</div>
+
 			<div class="w3ls-btn">
 				<div class="contact-forms">
 					<div class="wthreesubmitaits">
@@ -67,3 +76,43 @@
 	</div>
 </div>
 <p class="copyright">Panfleto Eletrônico</p>
+
+<script>
+
+  $(document).ready(function () {
+    var image = $("#image");
+    var noneImage = "images/no_image.png";
+
+    if (window.FileReader) {
+      image.change(function () {
+        var fileReader = new FileReader(),
+        files = this.files,
+        file;
+
+        if (!files.length) {
+          return;
+        }
+
+        file = files[0];
+
+        if (/^image\/\w+$/.test(file.type)) {
+          fileReader.readAsDataURL(file);
+          fileReader.onload = function () {
+            $("#displayImage").attr("src", this.result);
+          };
+        } else {
+          showMessage("Por favor escolha uma imagem.");
+        }
+      });
+    }
+
+    $("#cancelImage").click(function (){
+      $("#image").val(null);
+      $("#displayImage").attr("src", noneImage);
+
+      return ;
+    });
+
+  });
+
+</script>

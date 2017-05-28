@@ -10,7 +10,6 @@
 			<li>
 				<%= error.message %>
 			</li>
-
 		</ul>
 	</div>
 	<% } %>
@@ -31,34 +30,49 @@
 				<div class="grid-agileits1">
 					<div class="form-control">
 						<label class="header">Título</label>
-						<input type="text" id="name" name="name" placeholder="Nome do Produto" required="" value='<%= data.name %>'>
+						<input type="text" id="name" name="name" placeholder="Nome do Produto"
+            required="" value='<%= data.name %>'>
 					</div>
 					<div class="form-control">
 						<label class="header">Descrição</label>
-						<input type="text" id="description" name="description" placeholder="Descrição" required="" value='<%= data.description %>'>
+						<input type="text" id="description" name="description" placeholder="Descrição"
+            required="" value='<%= data.description %>'>
 					</div>
 					<div class="form-control">
 						<label class="header">Data de início</label>
-						<input type="date" id="startDate" name="startDate" placeholder="Data de início" value='<%= data.startDate %>'>
+						<input type="date" id="startDate" name="startDate" placeholder="Data de início"
+            value='<%= data.startDate %>'>
 					</div>
 					<div class="form-control">
 						<label class="header">Data de fim</label>
-						<input type="date" id="endDate" name="endDate" placeholder="Data de fim" value='<%= data.endDate %>'>
+						<input type="date" id="endDate" name="endDate" placeholder="Data de fim"
+            value='<%= data.endDate %>'>
 					</div>
-          				<div class="form-control">
+  				<div class="form-control">
 						<label class="header">Preço normal</label>
-						<input type="text" id="price" name="vPrice" placeholder="$" value='<%= data.vPrice %>'>
+						<input type="text" id="price" name="vPrice" placeholder="$"
+            value='<%= data.vPrice %>'>
 					</div>
 					<div class="form-control">
 						<label class="header">Preço oferta</label>
-						<input type="text" id="newPrice" name="vNewPrice" placeholder="$" value='<%= data.vNewPrice %>'>
+						<input type="text" id="newPrice" name="vNewPrice" placeholder="$"
+            value='<%= data.vNewPrice %>'>
 					</div>
 				</div>
 			</div>
-			<div class="content-wthree2">
-				<label class="header">Imagem</label>
-				<input type="file" name="image" id="image" accept="image/*" class="form-control">
+
+      <div>
+        <label class="header">Imagem</label>
+        <img src="images/no_image.png"
+          class="image"  id="displayImage"  style="max-width: 250px; max-height: 250px;"/>
+        <div>
+          <input type="file" name="image" id="image" accept="image/*" class="form-control">
+        </div>
+        <div>
+          <input type="submit" id="cancelImage" value="Cancelar seleção">
+        </div>
 			</div>
+
 			<div class="w3ls-btn">
 				<div class="contact-forms">
 					<div class="wthreesubmitaits">
@@ -67,7 +81,48 @@
 					</div>
 				</div>
 			</div>
+
 		</form>
 	</div>
 </div>
 <p class="copyright">Panfleto Eletrônico</p>
+
+<script>
+
+  $(document).ready(function () {
+    var image = $("#image");
+    var noneImage = "images/no_image.png";
+
+    if (window.FileReader) {
+      image.change(function () {
+        var fileReader = new FileReader(),
+        files = this.files,
+        file;
+
+        if (!files.length) {
+          return;
+        }
+
+        file = files[0];
+
+        if (/^image\/\w+$/.test(file.type)) {
+          fileReader.readAsDataURL(file);
+          fileReader.onload = function () {
+            $("#displayImage").attr("src", this.result);
+          };
+        } else {
+          showMessage("Por favor escolha uma imagem.");
+        }
+      });
+    }
+
+    $("#cancelImage").click(function (){
+      $("#image").val(null);
+      $("#displayImage").attr("src", noneImage);
+
+      return ;
+    });
+
+  });
+
+</script>

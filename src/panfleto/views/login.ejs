@@ -3,6 +3,7 @@
 <h1>PANFLETO ELETRÔNICO</h1>
 
 <h2>Acesse sua conta</h2>
+
 <div class="w3layoutscontaineragileits">
 
     <% if (locals.error) { %>
@@ -35,15 +36,25 @@
 		<input type="text" placeholder="Administrador" name="login" value='<%= data.login %>' required>
 		<input type="password" placeholder="Senha" name="password" value='<%= data.password %>' required>
 
-		<div class="aitssendbuttonw3ls">
-			<div>
+		<div class="row aitssendbuttonw3ls">
+
+			<div class="col-md-6">
 				<input type="submit" value="LOGIN">
 			</div>
 
-			<div>
-				<p><a href="/register">CADASTRAR<span>→</span></a></p>
+			<div class="col-md-6">
+				<p><a href="/register">CADASTRAR<span></span></a></p>
+			</div>
+
+			<div  class="col-md-6">
+				<p><a href="">Esqueceu a senha?<span></span></a></p>
 			</div>
 		</div>
+
+
+
+	</div>
+
 
 	</form>
 </div>

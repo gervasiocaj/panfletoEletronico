@@ -32,7 +32,7 @@
 
 	<form action='/register' method='post'>
 
-		<div class='personalData'>
+		<div class='row personalData'>
 			<h3>Dados pessoais</h3>
 			<input type="text" placeholder="Administrador" name="login" value='<%= data.login %>' required>
 			<input type="text" placeholder="Empresa" name="company" value='<%= data.company %>' required>
@@ -41,7 +41,7 @@
 			<input type="password" placeholder="Repita a senha" name="passconf" value='<%= data.passconf %>' required>
 		</div>
 
-		<div class='addressData'>
+		<div class='row addressData'>
 			<h3>Endereço</h3>
 			<input type="text" placeholder="Endereço"
 				   name="address[street]" <% if (data.address) {%> value='<%= data.address.street %>' <% } %>
@@ -67,7 +67,7 @@
 			>
 		</div>
 
-		<div class='networkData'>
+		<div class='row networkData'>
 			<h3>Rede</h3>
 			<% if (data.networks) { %>
 			<% Object.keys(data.networks).forEach(function (i) { %>

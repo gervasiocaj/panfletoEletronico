@@ -39,7 +39,6 @@ module.exports.create = function (req, res) {
             mimetype: req.file.mimetype
         });
         item.image = image;
-        // item.markModified('image');
     }
     item.marketId = req.user;
     item.save()

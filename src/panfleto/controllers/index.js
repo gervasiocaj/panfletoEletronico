@@ -1,7 +1,12 @@
 var passport = require('passport');
 
-module.exports.home = function(req, res){
-  res.type('text').send('Server Online');
+module.exports.home = function(req, res) {
+    var flash = req.flash();
+
+    if (flash.hasProperties())
+        res.locals.succezz = flash;
+
+    res.render('home');
 };
 
 module.exports.login = function (req, res) {

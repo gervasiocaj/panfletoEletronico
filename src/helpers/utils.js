@@ -49,6 +49,14 @@ module.exports.extractErrorInfo = function (err) {
     return errInfo;
 };
 
+module.exports.resultError = function (err) {
+    if (err.name === 'ValidationError')
+        return {status: 'error', error: err.name, error_description: module.extractErrorInfo(err)};
+    else
+        return {status: 'error', error: err.name, error_description: err.message || 'Internal Server Error'};
+};
+
 module.exports.dateFormatter = function(date) {
     return moment(date).format('DD-MM-YYYY')
 };
+

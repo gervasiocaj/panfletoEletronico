@@ -5,12 +5,12 @@ var express = require('express'),
 var src = process.cwd() + '/src/';
 
 // Load Controllers
-var controller = require(src + 'api/controllers/api');
+var controller = require(src + 'api/controllers/market');
 
-/* GET API Status */
-router.get('/', controller.status);
+/* GET all markets*/
+router.get ('/', controller.markets);
 
-/* GET API Status */
-router.get('/status', controller.status);
+/* GET a specific market*/
+router.get('/:id', controller.market);
 
 module.exports = router;

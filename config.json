@@ -17,6 +17,10 @@
       }
     }
   },
+  "geocode": {
+    "clientID": "125864993307-uct771sru27ies9gfkp1t027osf1hcbj.apps.googleusercontent.com",
+    "apiKey": "AIzaSyCygi_NV1IngLzeffAuJTd9sw6IlFttO64"
+  },
   "images": {
     "mimetype": ["image/jpg", "image/jpeg", "image/png"]
   }

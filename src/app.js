@@ -49,18 +49,20 @@ require(src + 'authentication/auth');
 require(src + 'db/mongoose');
 
 // Load all routes
-var login = require('./panfleto/routes/index'),
-    market = require('./panfleto/routes/market'),
-    item = require('./panfleto/routes/item');
+var web = require('./panfleto/routes/index'),
+    webMarket = require('./panfleto/routes/market'),
+    webItem = require('./panfleto/routes/item');
 
 // Load API routes
-var api = require('./api/routes/api');
+var api = require('./api/routes/api'),
+    apiMarket = require('./api/routes/market');
 
 // Register routes
-app.use('/', login);
-app.use('/', market);
-app.use('/item', item);
+app.use('/', web);
+app.use('/', webMarket);
+app.use('/item', webItem);
 app.use('/api', api);
+app.use('/api/market', apiMarket);
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {

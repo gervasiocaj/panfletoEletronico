@@ -3,6 +3,12 @@ var mongoose = require('mongoose'),
     uniqueValidator = require('mongoose-unique-validator'),
     Schema = mongoose.Schema;
 
+// Find project working directory
+var src = process.cwd() + '/src/';
+
+var geoCoder = require(src + 'helpers/geoCoder'),
+    log      = require(src + 'helpers/logging')(module);
+
 
 var AddressSchema = new Schema({
 
@@ -63,6 +69,53 @@ var AddressSchema = new Schema({
 }, {
     versionKey: false
 });
+
+AddressSchema.virtual('coordinates')
+    .set(function (coordinates) {
+        this.latitude  = coordinates.latitude;
+        this.longitude = coordinates.longitude;
+    })
+    .get(function () {
+        return { latitude : this.latitude, longitude: this.longitude }
+    });
+
+AddressSchema.virtual('localization')
+    .get(function () {
+        return {
+            address: this.number ? '%s %s'.format(this.number, this.street) : this.street,
+            city   : this.city,
+            state  : this.province,
+            country: this.country,
+            zipcode: this.postalCode
+        }
+    });
+
+AddressSchema.methods.toJSON = function () {
+    return {
+        street     : this.street,
+        number     : this.number,
+        postalCode : this.postalCode,
+        city       : this.city,
+        province   : this.province,
+        country    : this.country,
+        coordinates: this.coordinates
+    }
+};
+
+// Register cascading actions
+AddressSchema.pre('save', function (next) {
+    var self = this;
+    geoCoder.getGeoCoordinates(this.localization, function (err, coordinates) {
+        if (err)
+            log.warn('Cannot find address coordinates. Error caused by: %s', err.message);
+
+        self.coordinates = coordinates;
+        next();
+    });
+});
+
+// Create index to geographical coordinates
+AddressSchema.index({ latitude: 1, longitude: 1 }, { unique: true });
 
 // Applying plugins to schema
 AddressSchema.plugin(uniqueValidator);

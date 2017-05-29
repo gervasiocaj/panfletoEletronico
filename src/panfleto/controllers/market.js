@@ -35,10 +35,13 @@ module.exports.signUp = function (req, res) {
     })
 		.catch(function (err) {
 			req.flash('message', utils.extractErrorInfo(err));
-
 			res.locals.error = req.flash();
 
+			Object.keys(data.networks).forEach(function (idx) {
+				delete data.networks[idx].password
+            });
 			delete data.password;
+
 			data.address = address;
 			return res.render('register', { data: data })
 	})

@@ -119,6 +119,17 @@ MarketSchema.methods.checkPassword = function(password) {
     return this.encryptPassword(password) === this.hash;
 };
 
+MarketSchema.methods.toJSON = function () {
+    return {
+        _id     : this._id,
+        company : this.company,
+        manager : this.login,
+        address : this.address,
+        networks: this.networks,
+        created : this.created
+    }
+};
+
 // Register cascading actions
 MarketSchema.pre('save', function (next) {
     var nestedAddress = this.address;

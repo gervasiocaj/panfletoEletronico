@@ -19,4 +19,10 @@ router.post('/login', controller.signIn);
 /* GET register page */
 router.get ('/register', controller.register);
 
+/* GET password forgot page */
+router.get('/pwdForgot', controller.pwdForgot);
+
+/* POST request for remind password into application */
+router.post('/pwdReminder', controller.pwdReminder);
+
 module.exports = router;

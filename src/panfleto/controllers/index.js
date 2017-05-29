@@ -1,5 +1,16 @@
 var passport = require('passport');
 
+// Find project working directory
+var src = process.cwd() + '/src/';
+
+var utils = require(src + 'helpers/utils'),
+    log   = require(src + 'helpers/logging')(module);
+
+var passwordReminder = require(src + 'helpers/pwdReminder');
+
+// Load models
+var Market = require(src + 'panfleto/models/market');
+
 module.exports.home = function(req, res) {
     var flash = req.flash();
 
@@ -38,5 +49,55 @@ module.exports.signIn = function (req, res, next) {
 };
 
 module.exports.register = function(req, res) {
+    var flash = req.flash();
+
+    if (flash.hasProperties())
+        res.locals.succezz = flash;
+
     res.render('register', {data : {}});
+};
+
+module.exports.pwdForgot = function (req, res) {
+    var flash = req.flash();
+
+    if (flash.hasProperties())
+        res.locals.succezz = flash;
+    
+    res.render('forgotPassword', {data: {}})
+};
+
+module.exports.pwdReminder = function (req, res) {
+    Market.findOne({email: req.body.email}, function (err, market) {
+        var message;
+        if (err) {
+            message = 'Error interno no banco de dados, entre em contato com a equipe do PanfletoEletronico®';
+            log.error(err.message || message);
+
+            /* Set flash error message */
+            req.flash('message', [message]);
+
+            res.locals.error = req.flash();
+            return res.status(500).render('forgotPassword', { data: {} })
+        } else if (!market) {
+            req.flash('message', ['Administrador não encontrado com o email: %s'.format(req.body.email)]);
+
+            res.locals.error = req.flash();
+            return res.status(404).render('forgotPassword', { data: {} })
+        } else {
+            passwordReminder.sendPwdReminder(market, function (err, info) {
+                if (err) {
+                    message = 'Error interno ao enviar o email, entre em contato com a equipe do PanfletoEletronico®';
+                    log.error(err.message || message);
+
+                    /* Set flash error message */
+                    req.flash('message', [message]);
+
+                    res.locals.error = req.flash();
+                    return res.status(500).render('forgotPassword', { data: {} })
+                }
+                req.flash('message', ['Email enviado com sucesso para o endereço: %s'.format(req.body.email)]);
+                res.redirect('/login')
+            })
+        }
+    });
 };

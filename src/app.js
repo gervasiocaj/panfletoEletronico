@@ -20,7 +20,7 @@ var config = require(src + '/helpers/appConf'),
 
 // view engine setup
 app.set('view engine', 'ejs'); // Set up ejs for HTML templates
-app.set('views', path.join(__dirname, 'panfleto/views'));
+app.set('views', [path.join(__dirname, 'panfleto/views/core'),  path.join(__dirname, 'panfleto/views/item')]);
 
 // set up our express application
 app.use(cookieParser()); // Read cookies (needed for auth)

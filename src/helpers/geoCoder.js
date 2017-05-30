@@ -26,6 +26,8 @@ module.exports.getGeoCoordinates = function (address, next) {
     hereGeocoder.geocode(address,  function (error, result) {
         if (error) {
             next(error, null);
+        } else if (result.length < 1) {
+            next(null, {})
         } else {
             if (result.length > 1) {
                 log.info("Get multiples addresses, get coordinates at first position");

@@ -108,14 +108,11 @@ AddressSchema.pre('save', function (next) {
     geoCoder.getGeoCoordinates(this.localization, function (err, coordinates) {
         if (err)
             log.warn('Cannot find address coordinates. Error caused by: %s', err.message);
-
-        self.coordinates = coordinates;
+        else
+            self.coordinates = coordinates;
         next();
     });
 });
-
-// Create index to geographical coordinates
-AddressSchema.index({ latitude: 1, longitude: 1 }, { unique: true });
 
 // Applying plugins to schema
 AddressSchema.plugin(uniqueValidator);

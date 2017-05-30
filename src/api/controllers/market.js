@@ -6,6 +6,7 @@ var utils = require(src + 'helpers/utils'),
 
 // Load Models
 var Market = require(src + 'panfleto/models/market');
+var Product = require(src + 'panfleto/models/product');
 
 // constant fields
 var MAX_SAFE_INTEGER = 9007199254740991;
@@ -57,4 +58,11 @@ module.exports.market  = function (req, res) {
                 return res.json({ market: market, status: 'ok', message: message });
             }
         });
+};
+
+module.exports.products  = function (req, res) {
+    Product.find({marketId: req.params.id}, function(err, products) {
+        if (err) return res.json({ status: 'error', error: err });
+        else return res.json({ status: 'ok', products: products });
+    })
 };

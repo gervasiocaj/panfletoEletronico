@@ -13,4 +13,7 @@ router.get ('/', controller.markets);
 /* GET a specific market*/
 router.get('/:id', controller.market);
 
+/* GET the products in a specific market*/
+router.get('/:id/product', controller.products);
+
 module.exports = router;

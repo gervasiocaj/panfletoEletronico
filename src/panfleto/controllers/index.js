@@ -67,6 +67,10 @@ module.exports.pwdForgot = function (req, res) {
 };
 
 module.exports.pwdReminder = function (req, res) {
+    if (!passwordReminder.isRunning()) {
+        //TODO(diegoadolfo): create action to report this
+    }
+
     Market.findOne({email: req.body.email}, function (err, market) {
         var message;
         if (err) {
